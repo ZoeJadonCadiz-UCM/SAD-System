@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Payment Dashboard</title>
+        <link rel="stylesheet" href="../css/payments.css" />
+    </head>
+
+    <body>
+
+                    <nav class="navbar">
+                        <div class="nav-left">
+                            <a href="account.html" class="nav-btn active-page">Account</a>
+                        </div>
+
+                        <!--navigation bars but kanang naay hashtag temporary rana-->
+                        <div class="nav-right">
+                            <a href="dashboard.html" class="nav-btn">Dashboard</a>
+                            <a href="payments.html" class="nav-btn1">Payments</a>
+                            <a href="room.html" class="nav-btn">Room</a>
+                            <a href="Upkeep.html" class="nav-btn">UpKeep</a>
+                            <a href="../../login/html/login.html" class="nav-btn logout">Log-out</a>
+                        </div>
+                    </nav>
+
+        <div class="container">
+
+            <div class="card">
+                <span class="card-header">Due Payment</span>
+
+                <div class="search-box">
+                    <input class="search-input" placeholder="Search..." />
+                </div>
+
+                <div class="payment-boxes">
+                    <div class="box">
+                        <div>Monthly Rent</div>
+                        <div class="price-green">$ 450</div>
+                    </div>
+
+                    <div class="box">
+                        <div>Pending Payments<br>(Overdues)</div>
+                        <div class="price-orange">$ 1,350</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <span class="card-header">Payment History</span>
+
+                <table>
+                    <tr>
+                        <th>Monthly Payment</th>
+                        <th>Due Date</th>
+                        <th>Paid On</th>
+                        <th>Status</th>
+                    </tr>
+
+                    <tr>
+                        <td>August 2025</td>
+                        <td>8-05-25</td>
+                        <td>------</td>
+                        <td><span class="status pending">Pending</span></td>
+                    </tr>
+
+                    <tr>
+                        <td>September 2025</td>
+                        <td>11-05-25</td>
+                        <td>------</td>
+                        <td><span class="status pending">Pending</span></td>
+                    </tr>
+
+                    <tr>
+                        <td>October 2025</td>
+                        <td>11-05-25</td>
+                        <td>------</td>
+                        <td><span class="status pending">Pending</span></td>
+                    </tr>
+
+                    <tr>
+                        <td>November 2025</td>
+                        <td>11-05-25</td>
+                        <td>11-01-25</td>
+                        <td><span class="status paid">Paid</span></td>
+                    </tr>
+                </table>
+
+                <div class="next-payment">Next Payment Due: December 5, 2025</div>
+            </div>
+
+        </div>
+
+    </body>
+</html>
