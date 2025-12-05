@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Dormitory System</title>
+        <link rel="stylesheet" href="../css/tenant.css"> 
+        <script src ="../js/tenant.js"></script>
+    </head>
+        <body>
+
+            <!--again, mao ni ang headers-->
+            <div class="header-title">Dormitory Management System</div>
+            <div class="header-logo">LOGO</div>
+
+            <!--role tabs same rani sa previous buttons nga either dorm owner or tenants nga pag sign in-->
+            <div class="role-tabs">
+                <div class="role-tab active">
+                        <a href="dormowner.html">🏠︎ Dorm Owner</a>
+                </div>
+
+                    <div class="role-tab">
+                        <a href="tenant.html">👤 Tenant</a>
+                    </div>
+
+            </div>
+
+            <!--log in card nga layout where dire maka sign in-->
+            <div class="login-card">
+
+                <div class="signin-title">Sign-In</div>
+ 
+                <form id="loginForm" onsubmit = "return loginTenant()">
+
+                    <label class="input-label">Email</label>
+                    <input type="email" id = "email" class="input-field" placeholder="Enter your email" required>
+
+                    <label class="input-label">Password</label>
+                    <input type="password" id = "password" class="input-field" placeholder="Enter your password" required>
+
+                    <button type="submit" class="submit-btn">Sign In as Tenant</button>
+
+                </form>
+
+                    <div class="signup-text">Don't have an account? <a href="../html/signuptenant.html">Sign Up</a></div>
+
+            </div>
+
+        </body>
+</html>

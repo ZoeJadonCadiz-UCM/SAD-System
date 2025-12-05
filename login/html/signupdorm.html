@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Dormitory System</title>
+        <link rel="stylesheet" href="../css/signupdorm.css"> 
+        <script src = "../js/signupdorm.js"></script>
+    </head>
+        <body>
+
+            <!--same thing, katong headers-->
+            <div class="header-title">Dormitory Management System</div>
+            <div class="header-logo">LOGO</div>
+
+            <!--buttons where either dorm owner or tenants nga sign in-->
+            <div class="role-tabs">
+                <div class="role-tab active">
+                        <a href = "dormowner.html">🏠︎ Dorm Owner</a>
+                </div>
+
+                <div class = "role-tab">
+                        <a href = "tenant.html">👤 Tenant</a>
+                </div>
+            </div>
+
+            <!--log in cards, whole box where maka type og information-->
+            <div class = "login-card">
+
+                <div class = "signin-title">Sign-Up</div>
+
+                <!--dire mag sign up or fill up og information-->
+                <form id = "signupForm">
+
+                    <input type="firstname" id = "firstname" class="input-field" placeholder="Enter your first name" required>
+
+                    <input type="lastname" id = "lastname" class="input-field" placeholder="Enter your last name" required>
+
+                    <input type="email" id = "email" class="input-field" placeholder="Enter your email" required>
+
+                    <input type="password" id = "password" class="input-field" placeholder="Enter your password" required>
+
+                    <input type="password" id = "confirmPassword" class="input-field" placeholder="Confirm your password" required>
+
+                    <button type="submit" class="submit-btn">Sign Up as Dorm Owner</button>
+
+                </form>
+
+                    <div class="signup-text">Already have an account? <a href="dormowner.html">Sign In</a></div>
+
+            </div>
+
+        </body>
+</html>

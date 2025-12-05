@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Dormitory System</title>
+        <link rel="stylesheet" href="../css/dormowner.css"> 
+        <script src ="../js/login.js"></script>
+    </head>
+
+        <body>
+
+            <!--mao ni ang header-->
+            <div class="header-title">Dormitory Management System</div>
+            <div class="header-logo">LOGO</div>
+
+            <!--katong buttons nga either dorm owner or tenant ang pag sign in-->
+            <div class="role-tabs">
+                <div class="role-tab active">
+                        <a href="dormowner.html">🏠︎ Dorm Owner</a>
+                </div>
+
+                    <div class="role-tab">
+                        <a href="tenant.html">👤 Tenant</a>
+                    </div>
+            </div>
+
+            <!--this part kay kato whole box nga sign in infos and such-->
+            <div class="login-card">
+
+                <div class="signin-title">Sign-In</div>
+
+                <!--mao ni ang login layout, katong fill upanan-->
+                <form id="loginForm" onsubmit = "return loginDormOwner()">
+
+                    <label class="input-label">Email</label>
+                    <input type="email" id="email" class="input-field" placeholder="Enter your email" required>
+
+                    <label class="input-label">Password</label>
+                    <input type="password" id="password" class="input-field" placeholder="Enter your password" required>
+
+                    <button type="submit" id="loginBtn" class="submit-btn">Sign In as Dorm Owner</button>
+
+                </form>
+
+                    <div class="signup-text">Don't have an account? <a href="../html/signupdorm.html">Sign Up</a></div>
+
+            </div>
+
+        </body>
+</html>
