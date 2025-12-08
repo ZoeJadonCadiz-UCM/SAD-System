@@ -1,199 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Tenant Information</title>
-    <link rel="stylesheet" href="../css/tenants.css" />
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Tenant Information</title>
+        <link rel="stylesheet" href="../css/tenants.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"> 
+    </head>
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-</head>
+        <body>
 
-<body>
+            <nav class="navbar">
+                <div class="nav-left">
+                    <a href="account.html" class="nav-btn active-page">Account</a>
+                </div>
 
-                    <nav class="navbar">
-                        <div class = "nav-left">
-                            <a href="account.html" class = "nav-btn active-page">Account</a>
-                        </div>
+                <div class="nav-right">
+                    <a href="dashboard.html" class="nav-btn">Dashboard</a>
+                    <a href="payments.html" class="nav-btn">Payments</a>
+                    <a href="tenants.html" class="nav-btn1">Tenants</a>
+                    <a href="Upkeep.html" class="nav-btn">UpKeep</a>
+                    <a href="../../login/html/login.html" class="nav-btn">Log-out</a>
+                </div>
+            </nav>
 
-                        <div classs = "nav-right">
-                            <a href="dashboard.html" class ="nav-btn">Dashboard</a>
-                            <a href="payments.html" class ="nav-btn">Payments</a>
-                            <a href="tenants.html" class ="nav-btn1">Tenants</a>
-                            <a href="Upkeep.html" class ="nav-btn">UpKeep</a>
-                            <a href="../../login/html/login.html" class ="nav-btn">Log-out</a>
-                        </div>
-                    </nav>
+            <div class="main-container">
 
-    <div class="main-container">
+                <div class="header-row">
+                    <div class="title-box">Tenant Information</div>
+                    <input type="text" placeholder="Search..." class="search-bar" />
+                </div>
 
-        <div class="header-row">
-            <div class="title-box">Tenant Information</div>
-            <input type="text" placeholder="Search..." class="search-bar" />
-        </div>
+                <div class="floors-container">
 
-        <div class="floors-container">
-
-            <div class="floor-column">
-                <div class="floor-label">1st Floor Residents</div>
-
-                <div class="cards-grid">
-
-                    <div class="tenant-card">
-                        <div class="photo"></div>
-                        <div class="info">
-                            <h3>Sarah Johnson</h3>
-                            <p><i class="fa-regular fa-envelope"></i> sarah.j@example.com</p>
-                            <p><i class="fa-solid fa-phone"></i> +1 (555) 111-2222</p>
-                            <p><i class="fa-regular fa-calendar"></i> 2025-01-15</p>
-                        </div>
-                        <div class="bottom-row">
-                            <span class="unit"><i class="fa-solid fa-house"></i>101</span>
-                            <span class="status active">Active</span>
-                        </div>
+                    <div class="floor-column">
+                        <div class="floor-label">1st Floor Residents</div>
+                        <div class="cards-grid" id="firstFloorGrid"></div>
                     </div>
 
-                    <div class="tenant-card">
-                        <div class="photo"></div>
-                        <div class="info">
-                            <h3>Michael Chen</h3>
-                            <p><i class="fa-regular fa-envelope"></i> michael.c@example.com</p>
-                            <p><i class="fa-solid fa-phone"></i> +1 (555) 111-2222</p>
-                            <p><i class="fa-regular fa-calendar"></i> 2025-01-15</p>
-                        </div>
-                        <div class="bottom-row">
-                            <span class="unit"><i class="fa-solid fa-house"></i>102</span>
-                            <span class="status active">Active</span>
-                        </div>
-                    </div>
-
-                    <div class="tenant-card">
-                        <div class="photo"></div>
-                        <div class="info">
-                            <h3>Emily Rodriguez</h3>
-                            <p><i class="fa-regular fa-envelope"></i> Emily.R@example.com</p>
-                            <p><i class="fa-solid fa-phone"></i> +1 (555) 111-2222</p>
-                            <p><i class="fa-regular fa-calendar"></i> 2025-01-15</p>
-                        </div>
-                        <div class="bottom-row">
-                            <span class="unit"><i class="fa-solid fa-house"></i>103</span>
-                            <span class="status active">Active</span>
-                        </div>
-                    </div>
-
-                    <div class="tenant-card">
-                        <div class="photo"></div>
-                        <div class="info">
-                            <h3>David Kim</h3>
-                            <p><i class="fa-regular fa-envelope"></i> David.K@example.com</p>
-                            <p><i class="fa-solid fa-phone"></i> +1 (555) 111-2222</p>
-                            <p><i class="fa-regular fa-calendar"></i> 2025-01-15</p>
-                        </div>
-                        <div class="bottom-row">
-                            <span class="unit"><i class="fa-solid fa-house"></i>104</span>
-                            <span class="status active">Active</span>
-                        </div>
-                    </div>
-
-                    <div class="tenant-card">
-                        <div class="photo"></div>
-                        <div class="info">
-                            <h3>Jessica Williams</h3>
-                            <p><i class="fa-regular fa-envelope"></i> Jessica.W@example.com</p>
-                            <p><i class="fa-solid fa-phone"></i> +1 (555) 111-2222</p>
-                            <p><i class="fa-regular fa-calendar"></i> 2025-01-15</p>
-                        </div>
-                        <div class="bottom-row">
-                            <span class="unit"><i class="fa-solid fa-house"></i>105</span>
-                            <span class="status active">Active</span>
-                        </div>
+                    <div class="floor-column">
+                        <div class="floor-label">2nd Floor Residents</div>
+                        <div class="cards-grid" id="secondFloorGrid"></div>
                     </div>
 
                 </div>
+
             </div>
 
+            <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                const firstFloorRooms = [101, 102, 103, 104, 105];
+                const secondFloorRooms = [201, 202, 203, 204, 205];
 
-            <div class="floor-column">
-                <div class="floor-label">2nd Floor Residents</div>
+                const firstGrid = document.getElementById('firstFloorGrid');
+                const secondGrid = document.getElementById('secondFloorGrid');
 
-                <div class="cards-grid">
-
-                    <div class="tenant-card">
+                function createTenantCard(room) {
+                    const card = document.createElement('div');
+                    card.classList.add('tenant-card');
+                    card.dataset.room = room;
+                    card.innerHTML = `
                         <div class="photo"></div>
                         <div class="info">
-                            <h3>Olivia Davis</h3>
-                            <p><i class="fa-regular fa-envelope"></i> Olivia.D@example.com</p>
-                            <p><i class="fa-solid fa-phone"></i> +1 (555) 111-2222</p>
-                            <p><i class="fa-regular fa-calendar"></i> 2025-01-15</p>
+                            <h3 class="tenant-name"><i class="fa-solid fa-user"></i> Tenant Name</h3>
+                            <p class="tenant-email"><i class="fa-solid fa-envelope"></i> Email</p>
+                            <p class="tenant-phone"><i class="fa-solid fa-phone"></i> Contact No.</p>
+                            <p class="tenant-start"><i class="fa-solid fa-calendar-days"></i> Start Date</p>
                         </div>
                         <div class="bottom-row">
-                            <span class="unit"><i class="fa-solid fa-house"></i>201</span>
-                            <span class="status notice">Notice</span>
+                            <span class="unit"><i class="fa-solid fa-house"></i> Room ${room}</span>
+                            <span class="status"></span>
                         </div>
-                    </div>
+                    `;
+                    return card;
+                }
 
-                    <div class="tenant-card">
-                        <div class="photo"></div>
-                        <div class="info">
-                            <h3>Matthew Wilson</h3>
-                            <p><i class="fa-regular fa-envelope"></i> Olivia.D@example.com</p>
-                            <p><i class="fa-solid fa-phone"></i> +1 (555) 111-2222</p>
-                            <p><i class="fa-regular fa-calendar"></i> 2025-01-15</p>
-                        </div>
-                        <div class="bottom-row">
-                            <span class="unit"><i class="fa-solid fa-house"></i>202</span>
-                            <span class="status active">Active</span>
-                        </div>
-                    </div>
 
-                    <div class="tenant-card">
-                        <div class="photo"></div>
-                        <div class="info">
-                            <h3>Isabella Garcia</h3>
-                            <p><i class="fa-regular fa-envelope"></i> Isabella.G@example.com</p>
-                            <p><i class="fa-solid fa-phone"></i> +1 (555) 111-2222</p>
-                            <p><i class="fa-regular fa-calendar"></i> 2025-01-15</p>
-                        </div>
-                        <div class="bottom-row">
-                            <span class="unit"><i class="fa-solid fa-house"></i>203</span>
-                            <span class="status active">Active</span>
-                        </div>
-                    </div>
+                firstFloorRooms.forEach(room => firstGrid.appendChild(createTenantCard(room)));
+                secondFloorRooms.forEach(room => secondGrid.appendChild(createTenantCard(room)));
+            });
+            </script>
 
-                    <div class="tenant-card">
-                        <div class="photo"></div>
-                        <div class="info">
-                            <h3>Ethan Moore</h3>
-                            <p><i class="fa-regular fa-envelope"></i> Ethan.M@example.com</p>
-                            <p><i class="fa-solid fa-phone"></i> +1 (555) 111-2222</p>
-                            <p><i class="fa-regular fa-calendar"></i> 2025-01-15</p>
-                        </div>
-                        <div class="bottom-row">
-                            <span class="unit"><i class="fa-solid fa-house"></i>204</span>
-                            <span class="status active">Active</span>
-                        </div>
-                    </div>
 
-                    <div class="tenant-card">
-                        <div class="photo"></div>
-                        <div class="info">
-                            <h3>Daniel White</h3>
-                            <p><i class="fa-regular fa-envelope"></i> Daniel.W@example.com</p>
-                            <p><i class="fa-solid fa-phone"></i> +1 (555) 111-2222</p>
-                            <p><i class="fa-regular fa-calendar"></i> 2025-01-15</p>
-                        </div>
-                        <div class="bottom-row">
-                            <span class="unit"><i class="fa-solid fa-house"></i>205</span>
-                            <span class="status notice">Notice</span>
-                        </div>
-                    </div>
+            <script src="../js/tenantloader.js"></script>
 
-                </div>
-            </div>
-
-        </div>
-
-    </div>
-
-</body>
+        </body>
 </html>
