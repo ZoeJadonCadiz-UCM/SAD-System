@@ -1,16 +1,28 @@
 function loginTenant() {
-    const email = document.getElementById("email").value;
-    const pass = document.getElementById("password").value;
+    const inputEmail = document.getElementById("tenantLoginEmail").value.trim();
+    const inputPassword = document.getElementById("tenantLoginPassword").value.trim();
 
-    const correctEmail = "zoejadoncadiz@gmail.com";
-    const correctPassword = "12345";
+    const tenants = JSON.parse(localStorage.getItem("tenants")) || {};
 
-    if (email === correctEmail && pass === correctPassword) {
-        window.location.href = "../../tenant/html/dashboard.html";  
-        return false;
-    } else {
-        alert("Incorrect email or password.");
-        return false;
-        
+    let matchedTenant = null;
+
+    for (const room in tenants) {
+        const t = tenants[room];
+
+        if (t.email === inputEmail && t.password === inputPassword) {
+            matchedTenant = { ...t, room };
+            break;
+        }
     }
+
+    if (!matchedTenant) {
+        alert("❌ Incorrect email or password.");
+        return false;
+    }
+
+    localStorage.setItem("loggedTenant", JSON.stringify(matchedTenant));
+    alert("✔ Login successful!");
+
+    window.location.href = "../../tenant/html/dashboard.html"; // Change if needed
+    return false;
 }
