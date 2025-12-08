@@ -5,93 +5,94 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Account Page</title>
         <link rel="stylesheet" href="../css/account.css">
+        <script src="../js/account.js" defer></script>
+        <script src="../js/profile.js"></script>
     </head>
-        <body>
+    <body>
 
-            <!--navigation bars kato naa sa babaw nag linya-->
-            <nav class="navbar">
-                <div class="nav-left">
-                    <a href="account.html" class="nav-btn1 active-page">Account</a>
+        <!--navigation bars kato naa sa babaw nag linya-->
+        <nav class="navbar">
+            <div class="nav-left">
+                <a href="account.html" class="nav-btn1 active-page">Account</a>
+            </div>
+
+            <!--navigation bars but kanang naay hashtag temporary rana-->
+            <div class="nav-right">
+                <a href="dashboard.html" class="nav-btn">Dashboard</a>
+                <a href="payments.html" class="nav-btn">Payments</a>
+                <a href="tenants.html" class="nav-btn">Tenants</a>
+                <a href="Upkeep.html" class="nav-btn">UpKeep</a>
+                <a href="../../login/html/login.html" class="nav-btn logout">Log-out</a>
+            </div>
+        </nav>
+
+        <!--dire makita ang user infos inig click sa account nga navbar-->
+        <div class="content">
+
+            <div class="card">
+                <div class="card-title">User Information</div>
+
+                <div class="info-grid">
+
+                    <div class="profile-img">
+                        <div class="circle" id="profileDisplay"></div>
+                    </div>
+
+                    <div class="info-fields">
+                        <label>First name:</label>
+                        <div class="input-box" id="display-firstname"></div>
+
+                        <label>Last name:</label>
+                        <div class="input-box" id="display-lastname"></div>
+
+                        <label>Contact No:</label>
+                        <div class="input-box" id="display-contact">--</div>
+
+                        <label>Email:</label>
+                        <div class="input-box" id="display-email"></div>
+
+                        <label>Status:</label>
+                        <span class="status active">Active</span>
+                    </div>
+
                 </div>
+            </div>
 
-                <!--navigation bars but kanang naay hashtag temporary rana-->
-                <div class="nav-right">
-                    <a href="dashboard.html" class="nav-btn">Dashboard</a>
-                    <a href="payments.html" class="nav-btn">Payments</a>
-                    <a href="tenants.html" class="nav-btn">Room</a>
-                    <a href="Upkeep.html" class="nav-btn">UpKeep</a>
-                    <a href="../../login/html/login.html" class="nav-btn logout">Log-out</a>
-                </div>
-            </nav>
+            <!--account settings ubos sa account information-->
+            <div class="card account-settings">
+                <div class="card-title">Account Settings</div>
 
+                <div class="settings-grid">
 
-            <!--dire makita ang user infos inig click sa account nga navbar-->
-            <div class="content">
+                    <div class="settings-fields">
 
-                <div class="card">
-                    <div class="card-title">User Information</div>
+                        <label>Change First Name:</label>
+                        <input type="text" id="input-firstname" placeholder="Enter your firstname" class="settings-input">
 
-                    <div class="info-grid">
+                        <label>Change Last Name:</label>
+                        <input type="text" id="input-lastname" placeholder="Enter your lastname" class="settings-input">
 
-                        <div class="profile-img">
-                            <div class="circle"></div>
-                        </div>
+                        <label>Update Contact No:</label>
+                        <input type="text" id="input-contact" placeholder="Enter your new contact" class="settings-input">
 
-                        <div class="info-fields">
-                            <label>First name:</label>
-                            <div class="input-box">Kim</div>
+                        <label>Update Email:</label>
+                        <input type="email" id="input-email" placeholder="Enter your new email" class="settings-input email-box">
 
-                            <label>Last name:</label>
-                            <div class="input-box">Rangaig</div>
-
-                            <label>Contact No:</label>
-                            <div class="input-box">0911 222 3333</div>
-
-                            <label>Email:</label>
-                            <div class="input-box">kimrang21@gmail.com</div>
-
-                            <label>Status:</label>
-                            <span class="status active">Active</span>
-                        </div>
+                        <label>Change Password:</label>
+                        <input type="password" placeholder="Enter your new password" class="settings-input">
 
                     </div>
-                </div>
 
-
-                <!--account settings ubos sa account information-->
-                <div class="card account-settings">
-                    <div class="card-title">Account Settings</div>
-
-                    <div class="settings-grid">
-
-                        <div class="settings-fields">
-
-                            <label>Change First Name:</label>
-                            <input type="text" class="settings-input">
-
-                            <label>Change Last Name:</label>
-                            <input type="text" class="settings-input">
-
-                            <label>Update Contact No:</label>
-                            <input type="text" class="settings-input">
-
-                            <label>Update Email:</label>
-                            <input type="email" class="settings-input email-box">
-
-                            <label>Change Password:</label>
-                            <input type="password" class="settings-input">
-
-                        </div>
-
-                        <div class="settings-profile">
-                            <div class="settings-pic"></div>
-                            <a href="#" class="set-picture-link">Set Profile Picture</a>
-                        </div>
-
+                    <div class="settings-profile">
+                        <div class="settings-pic" id="profileSettingsDisplay"></div>
+                        <button id="changeProfileBtn" class="profile-btn">Change Profile Picture</button>
+                        <input type="file" id="profileUpload" accept="image/*" style="display:none;">
                     </div>
+
                 </div>
+            </div>
 
-            </div> 
+        </div> 
 
-        </body>
+    </body>
 </html>
