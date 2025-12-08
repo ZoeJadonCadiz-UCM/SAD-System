@@ -42,13 +42,14 @@ body {
 }
 
 .main-container {
-    margin: 40px auto;
-    width: 85%;
+    width: 1080px;   /* same fixed width as .page in payments.css */
+    margin: 30px auto;  /* same vertical spacing */
     background: #D9D9D9;
     padding: 30px;
     border-radius: 15px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.562);
 }
+
 
 .header-row {
     display: flex;
@@ -98,8 +99,8 @@ body {
 }
 
 .cards-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    display: flex;
+    flex-direction: column;
     gap: 25px 40px;
 }
 
@@ -111,6 +112,8 @@ body {
     flex-direction: column;
     color: white;
 }
+
+
 
 .photo {
     width: 70px;
