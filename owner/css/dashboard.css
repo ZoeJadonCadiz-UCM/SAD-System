@@ -3,11 +3,15 @@
     src: url(../font/OutfitRegular.ttf);
 }
 
-body {
+* {
     margin: 0;
     padding: 0;
-    background: #EEE8DF;
+    box-sizing: border-box;
     font-family: 'Outfit';
+}
+
+body {
+    background: #EEE8DF;
 }
 
 .navbar {
@@ -19,7 +23,7 @@ body {
     color: #D9D9D9;
 }
 
-.nav-btn {  
+.nav-btn {
     background: #D9D9D9;
     margin: 5px;
     padding: 10px 25px;
@@ -46,7 +50,7 @@ body {
 }
 
 .main-container {
-    width: 80%;
+    width: 1080px;  /* match payments page width */
     margin: 30px auto;
 }
 
@@ -85,61 +89,78 @@ body {
 .property-section {
     background: #D9D9D9;
     border-radius: 20px;
-    padding: 25px;
+    padding: 20px;
     display: flex;
     gap: 20px;
     margin-bottom: 30px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.562);
+    align-items: flex-start;
 }
 
+/* BLUE BOX */
 .property-info {
-    width: 68%;
+    width: 55%;
     background: #2C365A;
-    padding: 50px;
+    padding: 20px 25px;
     flex-direction: column;
     border-radius: 20px;
     color: white;
 }
 
-.property-info p strong {
-    font-size: 20px;
+.property-info .property-text {
+    font-size: 0.85em;
 }
 
 .property-img {
-    width: 35%;
+    width: 50%;
+    max-width: 400px;
     border-radius: 15px;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
 }
 
 .room-stats {
-    width: 20%;
+    width: 40%;
     display: flex;
     flex-direction: column;
-    gap: 25px;
+    gap: 15px;
+    justify-content: flex-start;
 }
 
 .stat-box {
     background: #2C365A;
-    padding: 25px;
-    border-radius: 20px;
+    padding: 15px;
+    border-radius: 15px;
     color: white;
     font-weight: bold;
-    font-size: 22px;
+    font-size: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.562);
 }
 
 .stat-number {
     display: inline-block;
-    margin-top: 10px;
+    margin-top: 8px;
     background: #D9D9D9;
-    padding: 12px 22px;
-    font-size: 32px;
+    padding: 10px 18px;
+    font-size: 28px;
     border-radius: 50px;
     color: black;
 }
 
+.room-stats .stat-box:nth-child(1) .stat-number {
+    color: black;
+}
+
+.room-stats .stat-box:nth-child(2) .stat-number {
+    color: #E51E18 ;
+}
+
+.room-stats .stat-box:nth-child(3) .stat-number {
+    color: #07B76C;
+}
+
+
 .room-layout {
-    background: white;
+    background: #D9D9D9;
     padding: 25px;
     border-radius: 20px;
     margin-bottom: 30px;
@@ -149,12 +170,14 @@ body {
 .tabs button {
     padding: 15px 25px;
     margin: 10px;
+    margin-bottom: 20px;
     border: none;
     border-radius: 10px;
-    background: #D9D9D9;
+    background: #EEE8DF;
     font-size: 17px;
     font-weight: bold;
     cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.562);
 }
 
 .tabs .active {
@@ -178,7 +201,6 @@ body {
     box-shadow: 0 5px rgba(0,0,0,0.3);
     cursor: pointer;
     transition: transform 0.2s, box-shadow 0.2s;
-    text-decoration: none; /* removes underline if any */
 }
 
 .room:hover {
@@ -186,19 +208,70 @@ body {
     box-shadow: 0 10px rgba(0,0,0,0.4);
 }
 
-.occupied { background: #E51E18; }
-.vacant { background: #07B76C; }
+.room.vacant {
+    background: #07B76C;
+}
+
+.room.occupied {
+    background: #E51E18;
+}
+
+.room.vacant:hover {
+    background: #05a95a;
+}
+
+.room.occupied:hover {
+    background: #c11712;
+}
+
+.vacant-label {
+    display: inline-block;
+    margin-top: 8px;
+    padding: 5px 12px;
+    background: #D9D9D9;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.room.vacant .vacant-label {
+    color: #2C365A;
+}
+
+.room.occupied .vacant-label {
+    color: #2C365A;
+}
 
 .owner-info {
     background: white;
-    padding: 25px;
+    padding: 30px;
     border-radius: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.562);
+    margin-top: 50px;
+}
+
+.header-label {
+    padding: 15px 25px;
+    margin: 10px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    background: #2C365A; 
+    color: white;
+    font-size: 17px;
+    font-weight: bold;
+    display: inline-block;
+}
+
+.owner-left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
 }
 
 .owner-content {
     display: flex;
-    align-items: flex-start;
+    align-items: flex-cent;
     gap: 40px;
     margin-top: 20px;
 }
@@ -208,23 +281,21 @@ body {
     height: 100px;
     background-color: #ccc;
     border-radius: 50%;
-    background: #dcdcdc;
     background-size: cover;
     background-position: center;
 }
 
 .active-status {
     color: white;
-    background: #27ae60;
+    background: #07B76C;
     padding: 5px 18px;
     border-radius: 8px;
 }
 
-/* Modal Styles */
 .modal {
-    display: none; 
+    display: none;
     position: fixed;
-    z-index: 1000;
+    z-index: 9999;
     left: 0;
     top: 0;
     width: 100%;
@@ -239,6 +310,7 @@ body {
     padding: 30px;
     border-radius: 20px;
     width: 400px;
+    z-index: 10000;
     box-shadow: 0 5px 15px rgba(0,0,0,0.3);
 }
 
@@ -252,25 +324,6 @@ body {
 
 .close:hover {
     color: black;
-}
-
-/* Modal Animation */
-@keyframes modalShow {
-    0% { opacity: 0; transform: scale(0.8); }
-    100% { opacity: 1; transform: scale(1); }
-}
-
-@keyframes modalHide {
-    0% { opacity: 1; transform: scale(1); }
-    100% { opacity: 0; transform: scale(0.8); }
-}
-
-.modal-content.show {
-    animation: modalShow 0.3s forwards;
-}
-
-.modal-content.hide {
-    animation: modalHide 0.3s forwards;
 }
 
 #roomForm input, #roomForm select, #roomForm button {
@@ -292,6 +345,16 @@ body {
 
 #roomForm button:hover {
     background-color: #1b2440;
+}
+
+.button-row {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.button-row button {
+    flex: 1;
 }
 
 
