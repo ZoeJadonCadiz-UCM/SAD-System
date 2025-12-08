@@ -1,63 +1,66 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const modal = document.getElementById("roomModal");
-    const modalContent = modal.querySelector('.modal-content');
-    const modalTitle = document.getElementById("modalTitle");
-    const closeBtn = document.querySelector(".close");
-    const roomForm = document.getElementById("roomForm");
 
-    // Open modal when a room is clicked
-    document.querySelectorAll('.room').forEach(room => {
-        room.addEventListener('click', () => {
-            const roomNumber = room.textContent.split('\n')[0].replace('Room ', '').trim();
-            modalTitle.textContent = `Edit Info - ${roomNumber}`;
-            modal.style.display = "block";
-            modalContent.classList.remove('hide');
-            modalContent.classList.add('show');
+document.addEventListener("DOMContentLoaded", () => {
+    const tabs = document.querySelectorAll(".room-layout .tabs button");
+    const rooms = document.querySelectorAll(".rooms .room");
+
+    // -------------------------------
+    // function: mo update ang room buttons
+    // -------------------------------
+    function updateRoomButtons() {
+        const tenants = JSON.parse(localStorage.getItem('tenants')) || {};
+
+        rooms.forEach(roomDiv => {
+            const roomNum = roomDiv.dataset.room;
+
+            if (tenants[roomNum] && tenants[roomNum].status === "Occupied") {
+                roomDiv.classList.remove("vacant");
+                roomDiv.classList.add("occupied");
+                roomDiv.querySelector(".vacant-label").textContent = "Occupied";
+            } else {
+                roomDiv.classList.remove("occupied");
+                roomDiv.classList.add("vacant");
+                roomDiv.querySelector(".vacant-label").textContent = "Vacant";
+            }
+        });
+
+        // update ang room stats
+        const totalRooms = rooms.length;
+        const occupiedRooms = Array.from(rooms).filter(r => r.classList.contains("occupied")).length;
+        const vacantRooms = totalRooms - occupiedRooms;
+
+        document.querySelector(".room-stats .stat-box:nth-child(1) .stat-number").textContent = totalRooms;
+        document.querySelector(".room-stats .stat-box:nth-child(2) .stat-number").textContent = occupiedRooms;
+        document.querySelector(".room-stats .stat-box:nth-child(3) .stat-number").textContent = vacantRooms;
+    }
+
+    // -------------------------------
+    // initial update on page load
+    // -------------------------------
+    updateRoomButtons();
+
+    // -------------------------------
+    // katong 1st and 2nd floor buttons
+    // -------------------------------
+    tabs.forEach((tab, index) => {
+        tab.addEventListener("click", () => {
+            // Remove active class from all tabs
+            tabs.forEach(t => t.classList.remove("active"));
+            tab.classList.add("active");
+
+            // Show/hide rooms based on floor
+            rooms.forEach(r => {
+                const roomNum = parseInt(r.dataset.room);
+
+                if (index === 0) {
+                    r.style.display = "block";
+                } else if (index === 1) {
+                    r.style.display = roomNum >= 101 && roomNum <= 105 ? "block" : "none"; 
+                } else if (index === 2) {
+                    r.style.display = roomNum >= 201 && roomNum <= 205 ? "block" : "none"; 
+                }
+            });
         });
     });
-
-    // Function to close modal with animation
-    function closeModal() {
-        modalContent.classList.remove('show');
-        modalContent.classList.add('hide');
-        modalContent.addEventListener('animationend', () => {
-            if (modalContent.classList.contains('hide')) {
-                modal.style.display = "none";
-            }
-        }, { once: true });
-    }
-
-    // Close modal when close button is clicked
-    closeBtn.onclick = closeModal;
-
-    // Close modal when clicking outside the modal content
-    window.onclick = function(event) {
-        if (event.target === modal) {
-            closeModal();
-        }
-    }
-
-    // Handle form submission
-    roomForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-
-        const tenantName = document.getElementById('tenantName').value;
-        const contact = document.getElementById('contact').value;
-        const status = document.getElementById('status').value;
-
-        console.log(`Tenant: ${tenantName}, Contact: ${contact}, Status: ${status}`);
-
-        const roomNumber = modalTitle.textContent.replace('Edit Info - ', '');
-        const roomDiv = Array.from(document.querySelectorAll('.room'))
-                             .find(r => r.textContent.includes(roomNumber));
-
-        if (roomDiv) {
-            roomDiv.innerHTML = `Room ${roomNumber}<br><small>${status}</small>`;
-            roomDiv.classList.remove('occupied', 'vacant');
-            roomDiv.classList.add(status.toLowerCase());
-        }
-
-        closeModal();
-        roomForm.reset();
-    });
+    
+    document.addEventListener('tenantsUpdated', updateRoomButtons);
 });
