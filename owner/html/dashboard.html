@@ -8,6 +8,8 @@
         <script src = "../js/floors.js"></script>
         <script src = "../js/dashboardProfile.js"></script>
         <script src = "../js/roomfillup.js"></script>
+        <script src="../js/roomModal.js"></script>
+      
     </head>
 
         <body>
@@ -38,10 +40,10 @@
                 <div class="property-section">
                     <div class="property-info">
                         <img src="../img/sad.jpg" class="property-img" alt="Property Image" />
-                        <p><strong>⚲ Address</strong><br>123 A. Kamagasan st. Cebu City, 12345</p>
-                        <p><strong>𓉱 Building Details</strong><br>2 Floors, 20 Rooms, Est. 2014</p>
-                        <p><strong>✆ Contact No.</strong><br>0912 345 6789</p>
-                        <p><strong>✉ Email</strong><br>ExampleDorms@gmail.com</p>
+                        <p><strong>⚲ Address</strong><br><span class="property-text">123 A. Kamagasan st. Cebu City, 12345</span></p>
+                        <p><strong>𓉱 Building Details</strong><br><span class="property-text">2 Floors, 20 Rooms, Est. 2014</span></p>
+                        <p><strong>✆ Contact No.</strong><br><span class="property-text">0912 345 6789</span></p>
+                        <p><strong>✉ Email</strong><br><span class="property-text">ExampleDorms@gmail.com</span></p>
                     </div>
 
 
@@ -71,23 +73,25 @@
                     </div>
 
                     <div class="rooms">
-                        <div class="room vacant">Room 101<br><small></small></div>
-                        <div class="room vacant">Room 102<br><small></small></div>
-                        <div class="room vacant">Room 103<br><small></small></div>
-                        <div class="room vacant">Room 104<br><small></small></div>
-                        <div class="room vacant">Room 105<br><small></small></div>
-                        <div class="room vacant">Room 106<br><small></small></div>
-                        <div class="room vacant">Room 107<br><small></small></div>
-                        <div class="room vacant">Room 108<br><small></small></div>
-                        <div class="room vacant">Room 109<br><small></small></div>
-                        <div class="room vacant">Room 110<br><small></small></div>
+                        <div class="room vacant" data-room="101">Room 101<br><span class="vacant-label">Vacant</span></div>
+                        <div class="room vacant" data-room="102">Room 102<br><span class="vacant-label">Vacant</span></div>
+                        <div class="room vacant" data-room="103">Room 103<br><span class="vacant-label">Vacant</span></div>
+                        <div class="room vacant" data-room="104">Room 104<br><span class="vacant-label">Vacant</span></div>
+                        <div class="room vacant" data-room="105">Room 105<br><span class="vacant-label">Vacant</span></div>
+
+                        <div class="room vacant" data-room="201">Room 201<br><span class="vacant-label">Vacant</span></div>
+                        <div class="room vacant" data-room="202">Room 202<br><span class="vacant-label">Vacant</span></div>
+                        <div class="room vacant" data-room="203">Room 203<br><span class="vacant-label">Vacant</span></div>
+                        <div class="room vacant" data-room="204">Room 204<br><span class="vacant-label">Vacant</span></div>
+                        <div class="room vacant" data-room="205">Room 205<br><span class="vacant-label">Vacant</span></div>
                     </div>
-                </div>
+
+
 
 
                 <div class="owner-info">
                     <div class="tabs">
-                        <button class="active">Dorm-Owner Information</button>
+                        <div class="active header-label">Dorm-Owner Information</div>
                     </div>
 
                     <div class="owner-content">
@@ -119,6 +123,9 @@
                             <label for="contact">Contact No.:</label>
                             <input type="text" id="contact" name="contact" required><br><br>
 
+                            <label for="account">Account name:</label>
+                            <input type="text" id="account" name="account" required><br><br>
+
                             <label class="input-label">Password:</label>
                             <input type="password" id="password" class="input-field" placeholder="" required><br><br>
 
@@ -128,7 +135,11 @@
                                 <option value="Vacant">Vacant</option>
                             </select><br><br>
 
-                            <button type="submit">Save</button>
+                            <div class="button-row">
+                                <button type="submit">Save</button>
+                                <button type="button" id="clearTenantBtn" class="clear-btn">Clear</button>
+                            </div>
+
                         </form>
                     </div>
                 </div>
