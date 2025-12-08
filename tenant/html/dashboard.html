@@ -3,113 +3,119 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Account Page</title>
+        <title>Dashboard</title>
         <link rel="stylesheet" href="../css/dashboard.css">
     </head>
+    <body>
 
-        <body>
+        <nav class="navbar">
+            <div class="nav-left">
+                <a href="account.html" class="nav-btn">Account</a>
+            </div>
+            <div class="nav-right">
+                <a href="dashboard.html" class="nav-btn1 active-page">Dashboard</a>
+                <a href="payments.html" class="nav-btn">Payments</a>
+                <a href="tenants.html" class="nav-btn">Room</a>
+                <a href="Upkeep.html" class="nav-btn">UpKeep</a>
+                <a href="../../login/html/login.html" class="nav-btn logout">Log-out</a>
+            </div>
+        </nav>
 
-            <nav class="navbar">
-                <div class="nav-left">
-                    <a href="account.html" class="nav-btn active-page">Account</a>
-                </div>
-
-                <!--navigation bars but kanang naay hashtag temporary rana-->
-                <div class="nav-right">
-                    <a href="dashboard.html" class="nav-btn1">Dashboard</a>
-                    <a href="payments.html" class="nav-btn">Payments</a>
-                    <a href="tenants.html" class="nav-btn">Room</a>
-                    <a href="Upkeep.html" class="nav-btn">UpKeep</a>
-                    <a href="../../login/html/login.html" class="nav-btn logout">Log-out</a>
-                </div>
-            </nav>
-
-            <div class="main-container">
-                    <div class="top-section">
-                    <div class="tab">Dashboard</div>
-                    <input type="text" class="search" placeholder="Search...">
-                    </div>
-                    
-
-
-                <div class="property-section">
-                    <div class="property-info">
-                        <img src="../img/sad.jpg" class="property-img" alt="Property Image" />
-                        <p><strong>⚲ Address</strong><br>123 A. Kamagasan st. Cebu City, 12345</p>
-                        <p><strong>𓉱 Building Details</strong><br>2 Floors, 20 Rooms, Est. 2014</p>
-                        <p><strong>✆ Contact No.</strong><br>0912 345 6789</p>
-                        <p><strong>✉ Email</strong><br>ExampleDorms@gmail.com</p>
-                    </div>
-
-
-                    <div class="room-stats">
-                        <div class="stat-box">
-                            <h3>Total Rooms</h3>
-                            <span class="stat-number">20</span>
-                        </div>
-                
-                        <div class="stat-box">
-                            <h3>Occupied Rooms</h3>
-                            <span class="stat-number">10</span>
-                        </div>
-                        <div class="stat-box">
-                            <h3>Vacant Rooms</h3>
-                            <span class="stat-number">10</span>
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="room-layout">
-                    <div class="tabs">
-                        <button class="active">Room Layout</button>
-                        <button>1st Floor</button>
-                        <button>2nd Floor</button>
-                    </div>
-
-
-                    <div class="rooms">
-                        <div class="room occupied">Room 101<br><small>Occupied</small></div>
-                        <div class="room occupied">Room 102<br><small>Occupied</small></div>
-                        <div class="room occupied">Room 103<br><small>Occupied</small></div>
-                        <div class="room occupied">Room 104<br><small>Occupied</small></div>
-                        <div class="room occupied">Room 105<br><small>Occupied</small></div>
-
-
-                        <div class="room vacant">Room 106<br><small>Vacant</small></div>
-                        <div class="room vacant">Room 107<br><small>Vacant</small></div>
-                        <div class="room vacant">Room 108<br><small>Vacant</small></div>
-                        <div class="room vacant">Room 109<br><small>Vacant</small></div>
-                        <div class="room vacant">Room 110<br><small>Vacant</small></div>
-                    </div>
-                </div>
-
-
-                <div class="owner-info">
-                    <div class="tabs">
-                        <button class="active">Dorm-Owner Information</button>
-                    </div>
-
-                    <div class="owner-content">
-                        <div class="owner-left">
-                            <div class="profile-photo"></div>
-                            <p><strong>Status:</strong> <span class="active-status">Active</span></p>
-                        </div>
-
-                        <div class="owner-details">
-                            <p><strong>Dorm Owner:</strong> Kim Rangaig</p>
-                            <p><strong>Contact No.:</strong> 0911 222 3333</p>
-                            <p><strong>Email:</strong> kimrang21@gmail.com</p>
-                            <p><strong>Years of Operation:</strong> 12 years</p>
-                        </div>
-                    </div>
-                </div>
-
-
-
+        <div class="main-container">
+            <div class="top-section">
+                <div class="tab">Dashboard</div>
+                <input type="text" class="search" placeholder="Search...">
             </div>
 
-        </body>
+            <div class="property-section">
+                <div class="property-info">
+                    <img src="../img/sad.jpg" class="property-img" alt="Property Image" />
+                    <p><strong>⚲ Address</strong><br>123 A. Kamagasan st. Cebu City, 12345</p>
+                    <p><strong>𓉱 Building Details</strong><br>2 Floors, 20 Rooms, Est. 2014</p>
+                    <p><strong>✆ Contact No.</strong><br>0912 345 6789</p>
+                    <p><strong>✉ Email</strong><br>ExampleDorms@gmail.com</p>
+                </div>
 
-    
-    
+                <div class="room-stats">
+                    <div class="stat-box">
+                        <h3>Total Rooms</h3>
+                        <span class="stat-number">20</span>
+                    </div>
+            
+                    <div class="stat-box">
+                        <h3>Occupied Rooms</h3>
+                        <span class="stat-number">10</span>
+                    </div>
+                    <div class="stat-box">
+                        <h3>Vacant Rooms</h3>
+                        <span class="stat-number">10</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="room-layout">
+                <div class="tabs">
+                    <button class="active">Room Layout</button>
+                    <button>1st Floor</button>
+                    <button>2nd Floor</button>
+                </div>
+
+                <div class="rooms">
+                    <div class="room occupied">Room 101<br><small>Occupied</small></div>
+                    <div class="room occupied">Room 102<br><small>Occupied</small></div>
+                    <div class="room occupied">Room 103<br><small>Occupied</small></div>
+                    <div class="room occupied">Room 104<br><small>Occupied</small></div>
+                    <div class="room occupied">Room 105<br><small>Occupied</small></div>
+
+                    <div class="room vacant">Room 106<br><small>Vacant</small></div>
+                    <div class="room vacant">Room 107<br><small>Vacant</small></div>
+                    <div class="room vacant">Room 108<br><small>Vacant</small></div>
+                    <div class="room vacant">Room 109<br><small>Vacant</small></div>
+                    <div class="room vacant">Room 110<br><small>Vacant</small></div>
+                </div>
+            </div>
+
+            <!-- Dorm Owner Information -->
+            <div class="owner-info">
+                <div class="tabs">
+                    <button class="active">Dorm-Owner Information</button>
+                </div>
+
+                <div class="owner-content">
+                    <div class="owner-left">
+                        <div class="profile-photo" id="dashboard-profile-photo"></div>
+                        <p><strong>Status:</strong> <span class="active-status">Active</span></p>
+                    </div>
+
+                    <div class="owner-details">
+                        <p><strong>Dorm Owner:</strong> <span id="dashboard-owner-name">Loading...</span></p>
+                        <p><strong>Contact No.:</strong> <span id="dashboard-owner-contact">Loading...</span></p>
+                        <p><strong>Email:</strong> <span id="dashboard-owner-email">Loading...</span></p>
+                        <p><strong>Years of Operation:</strong> 12 years</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <script>
+            // Load owner info from localStorage
+            window.addEventListener('DOMContentLoaded', () => {
+                const firstname = localStorage.getItem('firstname') || 'Kim';
+                const lastname = localStorage.getItem('lastname') || 'Rangaig';
+                const contact = localStorage.getItem('contact') || '0911 222 3333';
+                const email = localStorage.getItem('email') || 'kimrang21@gmail.com';
+
+                document.getElementById('dashboard-owner-name').textContent = `${firstname} ${lastname}`;
+                document.getElementById('dashboard-owner-contact').textContent = contact;
+                document.getElementById('dashboard-owner-email').textContent = email;
+
+                const profilePhoto = localStorage.getItem('profilePhoto');
+                if (profilePhoto) {
+                    document.getElementById('dashboard-profile-photo').style.backgroundImage = `url(${profilePhoto})`;
+                }
+            });
+        </script>
+
+    </body>
+</html>
