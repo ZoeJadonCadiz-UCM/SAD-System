@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="../css/dashboard.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-left">
+            <a href="account2.html" class="nav-btn">Account</a>
+        </div>
+        <div class="nav-right">
+            <a href="dashboard2.html" class="nav-btn1 active-page">Dashboard</a>
+            <a href="payments2.html" class="nav-btn">Payments</a>
+            <a href="tenants.html" class="nav-btn">Room</a>
+            <a href="Upkeep2.html" class="nav-btn">UpKeep</a>
+            <a href="../../login/html/login.html" class="nav-btn logout">Log-out</a>
+        </div>
+    </nav>
+
+    <div class="main-container">
+        <!-- Top Section -->
+        <div class="top-section">
+            <div class="tab">Dashboard</div>
+            <input type="text" class="search" placeholder="Search...">
+        </div>
+
+        <!-- Property Info & Room Stats -->
+        <div class="property-section">
+            <div class="property-info">
+                <img src="../img/sad.jpg" class="property-img" alt="Property Image" />
+                <p><strong>⚲ Address</strong><br><span class="property-text">123 A. Kamagasan st. Cebu City, 12345</span></p>
+                <p><strong>𓉱 Building Details</strong><br><span class="property-text">2 Floors, 20 Rooms, Est. 2014</span></p>
+                <p><strong>✆ Contact No.</strong><br><span class="property-text">0912 345 6789</span></p>
+                <p><strong>✉ Email</strong><br><span class="property-text">ExampleDorms@gmail.com</span></p>
+            </div>
+
+            <div class="room-stats">
+                <div class="stat-box">
+                    <h3>Total Rooms</h3>
+                    <span class="stat-number" id="totalRooms">0</span>
+                </div>
+                <div class="stat-box">
+                    <h3>Occupied Rooms</h3>
+                    <span class="stat-number" id="occupiedRooms">0</span>
+                </div>
+                <div class="stat-box">
+                    <h3>Vacant Rooms</h3>
+                    <span class="stat-number" id="vacantRooms">0</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Room Layout -->
+        <div class="room-layout">
+            <div class="tabs">
+                <button class="active">Rooms</button>
+                <button>1st Floor</button>
+                <button>2nd Floor</button>
+            </div>
+
+            <div class="rooms" id="roomsContainer"></div>
+        </div>
+
+        <!-- Dorm Owner Info -->
+        <div class="owner-info">
+            <div class="tabs">
+                <div class="active header-label">Dorm-Owner Information</div>
+            </div>
+
+            <div class="owner-content">
+                <div class="owner-left">
+                    <div class="profile-photo" id="dashboard-profile-photo"></div>
+                    <p><strong>Status:</strong> <span class="active-status">Active</span></p>
+                </div>
+
+                <div class="owner-details">
+                    <p><strong>Dorm Owner:</strong> <span id="dashboard-owner-name">Loading...</span></p>
+                    <p><strong>Contact No.:</strong> <span id="dashboard-owner-contact">Loading...</span></p>
+                    <p><strong>Email:</strong> <span id="dashboard-owner-email">Loading...</span></p>
+                    <p><strong>Years of Operation:</strong> 12 years</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            // --- Load Dorm-Owner Info ---
+            const dormOwner = JSON.parse(localStorage.getItem('accountUser')) || {};
+            const ownerName = `${dormOwner.firstName || 'Kim'} ${dormOwner.lastName || 'Rangaig'}`;
+            const ownerContact = dormOwner.contact || '0911 222 3333';
+            const ownerEmail = dormOwner.email || 'kimrang21@gmail.com';
+            const profilePhoto = localStorage.getItem('profilePicture');
+
+            document.getElementById('dashboard-owner-name').textContent = ownerName;
+            document.getElementById('dashboard-owner-contact').textContent = ownerContact;
+            document.getElementById('dashboard-owner-email').textContent = ownerEmail;
+
+            if (profilePhoto) {
+                const photoEl = document.getElementById('dashboard-profile-photo');
+                photoEl.style.backgroundImage = `url(${profilePhoto})`;
+            }
+
+            // --- Load Rooms ---
+            const roomsContainer = document.getElementById('roomsContainer');
+            const rooms = JSON.parse(localStorage.getItem('rooms')) || [];
+
+            roomsContainer.innerHTML = rooms.map(room => {
+                const roomClass = room.status === 'Occupied' ? 'occupied' : 'vacant';
+                return `<div class="room ${roomClass}" data-room="${room.number}">
+                            Room ${room.number}<br>
+                            <span class="vacant-label">${room.status}</span>
+                        </div>`;
+            }).join('');
+
+            // --- Update Room Stats ---
+            const totalRooms = rooms.length;
+            const occupiedRooms = rooms.filter(r => r.status === 'Occupied').length;
+            const vacantRooms = totalRooms - occupiedRooms;
+
+            document.getElementById('totalRooms').textContent = totalRooms;
+            document.getElementById('occupiedRooms').textContent = occupiedRooms;
+            document.getElementById('vacantRooms').textContent = vacantRooms;
+
+            // --- Floor Tabs Functionality ---
+            const tabs = document.querySelectorAll(".room-layout .tabs button");
+            tabs.forEach((tab, index) => {
+                tab.addEventListener("click", () => {
+                    tabs.forEach(t => t.classList.remove("active"));
+                    tab.classList.add("active");
+
+                    roomsContainer.querySelectorAll(".room").forEach(r => {
+                        const roomNum = parseInt(r.dataset.room);
+                        if (index === 0) {
+                            r.style.display = "block";
+                        } else if (index === 1) {
+                            r.style.display = roomNum >= 101 && roomNum <= 105 ? "block" : "none";
+                        } else if (index === 2) {
+                            r.style.display = roomNum >= 201 && roomNum <= 205 ? "block" : "none";
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>
