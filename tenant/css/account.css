@@ -127,6 +127,19 @@ body {
     left: 35px;
 }
 
+.circle, .settings-pic {
+    background-size: cover;      
+    background-position: center;  
+    background-repeat: no-repeat;
+}
+
+.has-image::before,
+.has-image::after {
+    display: none;
+}
+
+
+
 .info-fields {
     display: grid;
     grid-template-columns: 150px 1fr;
@@ -245,4 +258,23 @@ label {
     color: #2C365A;
     text-decoration: underline;
     cursor: pointer;
+}
+
+.profile-btn {
+    margin-top: 15px;
+    padding: 10px 25px;
+    font-size: 18px;
+    font-weight: 700;
+    color: #fff;
+    background-color: #2C365A;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    position: relative;
+    z-index: 10;
+}
+
+.profile-btn:hover {
+    background-color: #2C365A;
 }
