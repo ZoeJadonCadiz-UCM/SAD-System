@@ -1,28 +1,26 @@
 function loginTenant() {
-    const inputEmail = document.getElementById("tenantLoginEmail").value.trim();
-    const inputPassword = document.getElementById("tenantLoginPassword").value.trim();
+    const email = document.getElementById('tenantLoginEmail').value.trim();
+    const password = document.getElementById('tenantLoginPassword').value;
 
-    const tenants = JSON.parse(localStorage.getItem("tenants")) || {};
+    const tenants = JSON.parse(localStorage.getItem('tenants')) || {};
 
-    let matchedTenant = null;
-
+    // find tenant by email
+    let loggedInTenant = null;
     for (const room in tenants) {
-        const t = tenants[room];
-
-        if (t.email === inputEmail && t.password === inputPassword) {
-            matchedTenant = { ...t, room };
+        if (tenants[room].email === email && tenants[room].password === password) {
+            loggedInTenant = tenants[room];
             break;
         }
     }
 
-    if (!matchedTenant) {
-        alert("❌ Incorrect email or password.");
+    if (loggedInTenant) {
+        // e save ang current tenant in localStorage
+        localStorage.setItem('currentTenant', JSON.stringify(loggedInTenant));
+ 
+        window.location.href = "../../tenant/html/dashboard2.html";
+        return false; 
+    } else {
+        alert("Invalid email or password");
         return false;
     }
-
-    localStorage.setItem("loggedTenant", JSON.stringify(matchedTenant));
-    alert("✔ Login successful!");
-
-    window.location.href = "../../tenant/html/dashboard.html"; // Change if needed
-    return false;
 }
