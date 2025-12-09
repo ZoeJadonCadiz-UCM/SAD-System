@@ -1,4 +1,3 @@
-
 document.addEventListener('DOMContentLoaded', () => {
 
     const roomForm = document.getElementById('roomForm');
@@ -13,14 +12,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const passwordInput = document.getElementById('password');
     const statusSelect = document.getElementById('status');
 
-    // room stats elements
     const totalRoomsElem = document.querySelector('.stat-box:nth-child(1) .stat-number');
     const occupiedRoomsElem = document.querySelector('.stat-box:nth-child(2) .stat-number');
     const vacantRoomsElem = document.querySelector('.stat-box:nth-child(3) .stat-number');
 
-    // -------------------------------
-    // mo open ang modal
-    // -------------------------------
     document.querySelectorAll('.room').forEach(roomDiv => {
         roomDiv.addEventListener('click', () => {
             currentRoom = roomDiv.dataset.room;
@@ -60,7 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const tenants = JSON.parse(localStorage.getItem('tenants')) || {};
 
-        tenants[currentRoom] = {
+        const tenantData = {
             name: tenantNameInput.value,
             email: emailInput.value,
             contact: contactInput.value,
@@ -69,13 +64,29 @@ document.addEventListener('DOMContentLoaded', () => {
             status: statusSelect.value
         };
 
+        tenants[currentRoom] = tenantData;
         localStorage.setItem('tenants', JSON.stringify(tenants));
+
+        // -------------------------------
+        // SAVE LAST TENANT ONLY (for manual account.html update)
+        // -------------------------------
+        const fullName = tenantNameInput.value.trim();
+        const split = fullName.split(" ");
+
+        const lastTenant = {
+            firstName: split[0] || "",
+            lastName: split.slice(1).join(" ") || "",
+            email: emailInput.value.trim(),
+            contact: contactInput.value.trim(),
+            account: accountInput.value.trim(),
+            status: statusSelect.value,
+            password: passwordInput.value
+        };
+
+        localStorage.setItem("lastTenant", JSON.stringify(lastTenant));
 
         updateRoomVisual(currentRoom, statusSelect.value);
         updateRoomStats();
-
-        // notify other scripts (like roomfillup.js) to update if needed
-        document.dispatchEvent(new Event('tenantsUpdated'));
 
         roomModal.style.display = 'none';
         roomForm.reset();
@@ -90,15 +101,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
         updateRoomVisual(currentRoom, "Vacant");
         updateRoomStats();
-        document.dispatchEvent(new Event('tenantsUpdated'));
 
         roomModal.style.display = 'none';
         roomForm.reset();
     });
 
-    // -------------------------------
-    // HELPER: update Room Color & Label
-    // -------------------------------
     function updateRoomVisual(roomNumber, status) {
         const roomDiv = document.querySelector(`.room[data-room="${roomNumber}"]`);
         const tenants = JSON.parse(localStorage.getItem('tenants')) || {};
@@ -115,9 +122,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // -------------------------------
-    // HELPER: update Room Stats
-    // -------------------------------
     function updateRoomStats() {
         const rooms = document.querySelectorAll('.room');
         let total = rooms.length;
