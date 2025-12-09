@@ -9,16 +9,20 @@ document.addEventListener("DOMContentLoaded", () => {
         profilePhoto.style.borderRadius = "50%"; 
     }
 
-    const ownerName = document.querySelector(".owner-details p:nth-child(1)");
-    const ownerContact = document.querySelector(".owner-details p:nth-child(2)");
-    const ownerEmail = document.querySelector(".owner-details p:nth-child(3)");
+    const dormOwner = JSON.parse(localStorage.getItem("accountUser")) || {};
 
-    const fName = localStorage.getItem("firstName") || "Kim";
-    const lName = localStorage.getItem("lastName") || "Rangaig";
-    const contact = localStorage.getItem("contact") || "0911 222 3333";
-    const email = localStorage.getItem("email") || "kimrang21@gmail.com";
+    const fName = dormOwner.firstName || "Kim";
+    const lName = dormOwner.lastName || "Rangaig";
+    const contact = dormOwner.contact || "0911 222 3333";
+    const email = dormOwner.email || "kimrang21@gmail.com";
 
-    if (ownerName) ownerName.innerHTML = `<strong>Dorm Owner:</strong> ${fName} ${lName}`;
-    if (ownerContact) ownerContact.innerHTML = `<strong>Contact No.:</strong> ${contact}`;
-    if (ownerEmail) ownerEmail.innerHTML = `<strong>Email:</strong> ${email}`;
+    const ownerDetails = document.querySelector(".owner-details");
+    if (ownerDetails) {
+        ownerDetails.innerHTML = `
+            <p><strong>Dorm Owner:</strong> ${fName} ${lName}</p>
+            <p><strong>Contact No.:</strong> ${contact}</p>
+            <p><strong>Email:</strong> ${email}</p>
+            <p><strong>Years of Operation:</strong> 12 years</p>
+        `;
+    }
 });
