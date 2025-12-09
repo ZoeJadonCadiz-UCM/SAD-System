@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
         profileDisplay.style.backgroundImage = `url(${savedPic})`;
         profileDisplay.style.backgroundSize = "cover";
         profileDisplay.style.backgroundPosition = "center";
-        profileDisplay.classList.add("has-image"); // hide shapes
+        profileDisplay.classList.add("has-image"); 
 
         profileSettingsDisplay.style.backgroundImage = `url(${savedPic})`;
         profileSettingsDisplay.style.backgroundSize = "cover";
@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
             profileDisplay.style.backgroundImage = `url(${imageUrl})`;
             profileDisplay.style.backgroundSize = "cover";
             profileDisplay.style.backgroundPosition = "center";
-            profileDisplay.classList.add("has-image"); // hide shapes
+            profileDisplay.classList.add("has-image");
 
             profileSettingsDisplay.style.backgroundImage = `url(${imageUrl})`;
             profileSettingsDisplay.style.backgroundSize = "cover";
