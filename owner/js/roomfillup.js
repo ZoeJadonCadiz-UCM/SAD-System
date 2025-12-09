@@ -1,10 +1,9 @@
-
 document.addEventListener("DOMContentLoaded", () => {
     const tabs = document.querySelectorAll(".room-layout .tabs button");
     const rooms = document.querySelectorAll(".rooms .room");
 
     // -------------------------------
-    // function: mo update ang room buttons
+    // function: update room buttons
     // -------------------------------
     function updateRoomButtons() {
         const tenants = JSON.parse(localStorage.getItem('tenants')) || {};
@@ -23,7 +22,6 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
 
-        // update ang room stats
         const totalRooms = rooms.length;
         const occupiedRooms = Array.from(rooms).filter(r => r.classList.contains("occupied")).length;
         const vacantRooms = totalRooms - occupiedRooms;
@@ -31,6 +29,18 @@ document.addEventListener("DOMContentLoaded", () => {
         document.querySelector(".room-stats .stat-box:nth-child(1) .stat-number").textContent = totalRooms;
         document.querySelector(".room-stats .stat-box:nth-child(2) .stat-number").textContent = occupiedRooms;
         document.querySelector(".room-stats .stat-box:nth-child(3) .stat-number").textContent = vacantRooms;
+
+        // -------------------------------
+        // save room data for dashboard2.html
+        // -------------------------------
+        const roomData = Array.from(rooms).map(roomDiv => {
+            return {
+                number: roomDiv.dataset.room,
+                status: roomDiv.classList.contains("occupied") ? "Occupied" : "Vacant"
+            };
+        });
+
+        localStorage.setItem('rooms', JSON.stringify(roomData));
     }
 
     // -------------------------------
@@ -39,20 +49,18 @@ document.addEventListener("DOMContentLoaded", () => {
     updateRoomButtons();
 
     // -------------------------------
-    // katong 1st and 2nd floor buttons
+    // floor tab buttons
     // -------------------------------
     tabs.forEach((tab, index) => {
         tab.addEventListener("click", () => {
-            // Remove active class from all tabs
             tabs.forEach(t => t.classList.remove("active"));
             tab.classList.add("active");
 
-            // Show/hide rooms based on floor
             rooms.forEach(r => {
                 const roomNum = parseInt(r.dataset.room);
 
                 if (index === 0) {
-                    r.style.display = "block";
+                    r.style.display = "block"; 
                 } else if (index === 1) {
                     r.style.display = roomNum >= 101 && roomNum <= 105 ? "block" : "none"; 
                 } else if (index === 2) {
