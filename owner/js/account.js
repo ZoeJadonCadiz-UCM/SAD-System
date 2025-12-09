@@ -1,42 +1,41 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-    const fNameInput = document.getElementById("input-firstname");
-    const lNameInput = document.getElementById("input-lastname");
-    const contactInput = document.getElementById("input-contact");
-    const emailInput = document.getElementById("input-email");
-
     const displayFName = document.getElementById("display-firstname");
     const displayLName = document.getElementById("display-lastname");
     const displayContact = document.getElementById("display-contact");
     const displayEmail = document.getElementById("display-email");
 
-    displayFName.textContent = localStorage.getItem("firstName") || "";
-    displayLName.textContent = localStorage.getItem("lastName") || "";
-    displayContact.textContent = localStorage.getItem("contact") || "--";
-    displayEmail.textContent = localStorage.getItem("email") || "";
+    const fNameInput = document.getElementById("input-firstname");
+    const lNameInput = document.getElementById("input-lastname");
+    const contactInput = document.getElementById("input-contact");
+    const emailInput = document.getElementById("input-email");
 
-    fNameInput.value = localStorage.getItem("firstName") || "";
-    lNameInput.value = localStorage.getItem("lastName") || "";
-    contactInput.value = localStorage.getItem("contact") || "";
-    emailInput.value = localStorage.getItem("email") || "";
+    const savedUser = JSON.parse(localStorage.getItem("accountUser")) || {};
+
+    displayFName.textContent = savedUser.firstName || "--";
+    displayLName.textContent = savedUser.lastName || "--";
+    displayContact.textContent = savedUser.contact || "--";
+    displayEmail.textContent = savedUser.email || "--";
+
+    fNameInput.value = savedUser.firstName || "";
+    lNameInput.value = savedUser.lastName || "";
+    contactInput.value = savedUser.contact || "";
+    emailInput.value = savedUser.email || "";
 
     function updateAll() {
-        if (fNameInput.value.trim() !== "") {
-            displayFName.textContent = fNameInput.value;
-            localStorage.setItem("firstName", fNameInput.value);
-        }
-        if (lNameInput.value.trim() !== "") {
-            displayLName.textContent = lNameInput.value;
-            localStorage.setItem("lastName", lNameInput.value);
-        }
-        if (contactInput.value.trim() !== "") {
-            displayContact.textContent = contactInput.value;
-            localStorage.setItem("contact", contactInput.value);
-        }
-        if (emailInput.value.trim() !== "") {
-            displayEmail.textContent = emailInput.value;
-            localStorage.setItem("email", emailInput.value);
-        }
+        const updatedUser = {
+            firstName: fNameInput.value.trim(),
+            lastName: lNameInput.value.trim(),
+            contact: contactInput.value.trim(),
+            email: emailInput.value.trim()
+        };
+
+        localStorage.setItem("accountUser", JSON.stringify(updatedUser));
+
+        displayFName.textContent = updatedUser.firstName || "--";
+        displayLName.textContent = updatedUser.lastName || "--";
+        displayContact.textContent = updatedUser.contact || "--";
+        displayEmail.textContent = updatedUser.email || "--";
     }
 
     document.addEventListener("keydown", (event) => {
