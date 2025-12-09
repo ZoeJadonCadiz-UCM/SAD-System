@@ -9,9 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
             tabs.forEach(t => t.classList.remove("active"));
             tab.classList.add("active");
 
-            // Show/Hide rooms depending on which tab was clicked
             if (index === 0) {
-                // Room Layout → Show ALL rooms
                 rooms.forEach(r => r.style.display = "block");
             }
             else if (index === 1) {
