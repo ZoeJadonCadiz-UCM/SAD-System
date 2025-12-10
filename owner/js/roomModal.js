@@ -16,6 +16,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const occupiedRoomsElem = document.querySelector('.stat-box:nth-child(2) .stat-number');
     const vacantRoomsElem = document.querySelector('.stat-box:nth-child(3) .stat-number');
 
+    // ------------------------------
+    // Open Modal for Each Room
+    // ------------------------------
     document.querySelectorAll('.room').forEach(roomDiv => {
         roomDiv.addEventListener('click', () => {
             currentRoom = roomDiv.dataset.room;
@@ -39,6 +42,9 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // ------------------------------
+    // Close Modal
+    // ------------------------------
     document.querySelector('.close').addEventListener('click', () => {
         roomModal.style.display = 'none';
     });
@@ -49,6 +55,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     modalContent.addEventListener('click', (e) => e.stopPropagation());
 
+    // ------------------------------
+    // Submit Tenant Info
+    // ------------------------------
     roomForm.addEventListener('submit', (e) => {
         e.preventDefault();
         if (!currentRoom) return;
@@ -56,23 +65,26 @@ document.addEventListener('DOMContentLoaded', () => {
         const tenants = JSON.parse(localStorage.getItem('tenants')) || {};
 
         const tenantData = {
+            room: currentRoom,
             name: tenantNameInput.value,
             email: emailInput.value,
             contact: contactInput.value,
             account: accountInput.value,
             password: passwordInput.value,
-            status: statusSelect.value
+            status: statusSelect.value,     
+            rent: 450,                        
+            lastPayment: "------",
+            paymentStatus: "Pending"
         };
 
         tenants[currentRoom] = tenantData;
         localStorage.setItem('tenants', JSON.stringify(tenants));
 
         // -------------------------------
-        // SAVE LAST TENANT ONLY (for manual account.html update)
+        // Save last tenant info for account.html
         // -------------------------------
         const fullName = tenantNameInput.value.trim();
         const split = fullName.split(" ");
-
         const lastTenant = {
             firstName: split[0] || "",
             lastName: split.slice(1).join(" ") || "",
@@ -80,9 +92,9 @@ document.addEventListener('DOMContentLoaded', () => {
             contact: contactInput.value.trim(),
             account: accountInput.value.trim(),
             status: statusSelect.value,
-            password: passwordInput.value
+            password: passwordInput.value,
+            roomNumber: currentRoom 
         };
-
         localStorage.setItem("lastTenant", JSON.stringify(lastTenant));
 
         updateRoomVisual(currentRoom, statusSelect.value);
@@ -92,6 +104,9 @@ document.addEventListener('DOMContentLoaded', () => {
         roomForm.reset();
     });
 
+    // ------------------------------
+    // Clear Tenant Info
+    // ------------------------------
     document.getElementById('clearTenantBtn').addEventListener('click', () => {
         if (!currentRoom) return;
 
@@ -106,15 +121,17 @@ document.addEventListener('DOMContentLoaded', () => {
         roomForm.reset();
     });
 
+    // ------------------------------
+    // Update Room Appearance
+    // ------------------------------
     function updateRoomVisual(roomNumber, status) {
         const roomDiv = document.querySelector(`.room[data-room="${roomNumber}"]`);
-        const tenants = JSON.parse(localStorage.getItem('tenants')) || {};
         if (!roomDiv) return;
 
-        if (status === "Occupied" && tenants[roomNumber]) {
+        if (status === "Occupied") {
             roomDiv.classList.add('occupied');
             roomDiv.classList.remove('vacant');
-            roomDiv.querySelector('.vacant-label').textContent = tenants[roomNumber].name;
+            roomDiv.querySelector('.vacant-label').textContent = "Occupied";
         } else {
             roomDiv.classList.add('vacant');
             roomDiv.classList.remove('occupied');
@@ -122,6 +139,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // ------------------------------
+    // Update Room Stats
+    // ------------------------------
     function updateRoomStats() {
         const rooms = document.querySelectorAll('.room');
         let total = rooms.length;
