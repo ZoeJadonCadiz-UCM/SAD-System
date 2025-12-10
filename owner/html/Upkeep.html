@@ -33,19 +33,19 @@
                         <div class="status-grid">
                             <div class="status-card">
                                 <p>Pending<br>Request</p>
-                                <span class="count yellow">2</span>
+                                <span class="count yellow" id="pendingCount">2</span>
                             </div>
                             <div class="status-card">
                                 <p>In<br>Progress</p>
-                                <span class="count blue">2</span>
+                                <span class="count blue" id="inProgressCount">2</span>
                             </div>
                             <div class="status-card">
                                 <p>Completed</p>
-                                <span class="count green">2</span>
+                                <span class="count green" id="completedCount">2</span>
                             </div>
                             <div class="status-card">
                                 <p>Urgent<br>Request</p>
-                                <span class="count red">1</span>
+                                <span class="count red" id="urgentCount">1</span>
                             </div>
                         </div>
                     </div>
@@ -63,15 +63,7 @@
                     <div class="table-header">
                         <h3 class = "heading-box">Maintenance Requests</h3>
                         <div class="sort-dropdown">
-                            <label for="sort-select">Sort by:</label>
-                            <select id="sort-select">
-                                <option value="room">Room</option>
-                                <option value="tenant">Tenant Name</option>
-                                <option value="issue">Issue</option>
-                                <option value="priority">Priority</option>
-                                <option value="date">Date Received</option>
-                                <option value="status">Status</option>
-                            </select>
+                            <button id="clearTableBtn">Clear</button>
                         </div>
                     </div>
 
@@ -88,7 +80,7 @@
                             </tr>
                         </thead>
 
-                        <tbody>
+                        <tbody id="requestsTableBody">
 
                             <tr>
                                 <td>101</td>
@@ -140,6 +132,80 @@
 
                 </div>
             </div>
+
+            <script>
+                document.addEventListener('DOMContentLoaded', () => {
+                    const requestsTableBody = document.getElementById('requestsTableBody');
+
+                    const allRequests = JSON.parse(localStorage.getItem('requests')) || [];
+                    const tenants = JSON.parse(localStorage.getItem('tenants')) || {};
+
+                    function renderRequests() {
+                        requestsTableBody.innerHTML = '';
+
+                        allRequests.forEach((r, index) => {
+                            const tenantData = tenants[r.room] || {};
+                            const tenantName = (tenantData.firstName || tenantData.name?.split(" ")[0] || "") + " " +
+                                            (tenantData.lastName || tenantData.name?.split(" ").slice(1).join(" ") || r.name || "");
+
+                            const tr = document.createElement('tr');
+                            tr.innerHTML = `
+                                <td>${r.room}</td>
+                                <td class="link">${tenantName}</td>
+                                <td>${r.issue}</td>
+                                <td><span class="tag ${r.priority.toLowerCase()}">${r.priority}</span></td>
+                                <td>${r.date}</td>
+                                <td>
+                                    <select class="status-select ${r.status.toLowerCase().replace(' ', '-')}">
+                                        <option value="Pending" ${r.status === 'Pending' ? 'selected' : ''}>Pending</option>
+                                        <option value="In Progress" ${r.status === 'In Progress' ? 'selected' : ''}>In Progress</option>
+                                        <option value="Completed" ${r.status === 'Completed' ? 'selected' : ''}>Completed</option>
+                                    </select>
+                                </td>
+                            `;
+                            requestsTableBody.appendChild(tr);
+
+                            const select = tr.querySelector('.status-select');
+
+                            select.addEventListener('change', (e) => {
+                                r.status = e.target.value;
+                                select.className = `status-select ${r.status.toLowerCase().replace(' ', '-')}`;
+                                updateSummary();
+                                localStorage.setItem('requests', JSON.stringify(allRequests));
+                            });
+                        });
+
+                        updateSummary();
+                    }
+
+                    function updateSummary() {
+                        const pending = allRequests.filter(r => r.status === 'Pending').length;
+                        const inProgress = allRequests.filter(r => r.status === 'In Progress').length;
+                        const completed = allRequests.filter(r => r.status === 'Completed').length;
+                        const urgent = allRequests.filter(r => r.priority.toLowerCase() === 'urgent' && r.status !== 'Completed').length;
+
+                        document.getElementById('pendingCount').textContent = pending;
+                        document.getElementById('inProgressCount').textContent = inProgress;
+                        document.getElementById('completedCount').textContent = completed;
+                        document.getElementById('urgentCount').textContent = urgent;
+                    }
+
+                    const clearBtn = document.getElementById('clearTableBtn');
+                    if (clearBtn) {
+                        clearBtn.addEventListener('click', () => {
+
+                            requestsTableBody.innerHTML = '';
+
+                            document.getElementById('pendingCount').textContent = '0';
+                            document.getElementById('inProgressCount').textContent = '0';
+                            document.getElementById('completedCount').textContent = '0';
+                            document.getElementById('urgentCount').textContent = '0';
+                        });
+                    }
+
+                    renderRequests();
+                });
+                </script>
 
         </body>
 </html>
