@@ -170,7 +170,6 @@ label {
     color: #fff;
 }
 
-/* Account Settings */
 .account-settings {
     margin-top: 20px;
 }
@@ -254,7 +253,6 @@ label {
     display: none;
 }
 
-/* Button and links */
 .set-picture-link {
     margin-top: 15px;
     font-size: 20px;
@@ -282,5 +280,6 @@ label {
 .profile-btn:hover {
     background-color: #2C365A;
 }
+
 
 
