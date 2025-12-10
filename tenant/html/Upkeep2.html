@@ -5,123 +5,181 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Maintenance & UpKeep</title>
         <link rel="stylesheet" href="../css/Upkeep.css">
+        <style>
+            .priority-btn.selected { border: 2px solid #000; }
+            .priority-btn { cursor: pointer; }
+        </style>
     </head>
-
     <body>
 
-                        <nav class="navbar">
-                            <div class = "nav-left">
-                                <a href="account2.html" class = "nav-btn active-page">Account</a>
-                            </div>
-
-                            <div classs = "nav-right">
-                                <a href="dashboard2.html" class ="nav-btn">Dashboard</a>
-                                <a href="payments2.html" class ="nav-btn">Payments</a>
-                                <a href="room.html" class ="nav-btn">Room</a>
-                                <a href="Upkeep2.html" class ="nav-btn1">UpKeep</a>
-                                <a href="../../login/html/login.html" class ="nav-btn">Log-out</a>
-                            </div>
-                        </nav>
-
-        <div class="container">
-
-            <div class="card">
-                <span class="card-header">Request Maintenance</span>
-
-                <div class="request-row">
-                    <div class="issue-block">
-                        <label class="lbl">Describe the issue:</label>
-                        <textarea class="issue-text">write here....</textarea>
-                    </div>
-
-                    <div class="priority-block">
-                        <label class="lbl">Priority:</label>
-
-                        <div class="priority-btn low">Low</div>
-                        <div class="priority-btn medium">Medium</div>
-                        <div class="priority-btn urgent">Urgent</div>
-
-                        <button class="send-btn">SEND</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card">
-                <span class="card-header">Maintenance & UpKeep</span>
-
-                <div class="search-box">
-                    <input class="search-input" placeholder="Search..." />
-                </div>
-
-                <div class="summary-row">
-                    <div class="summary-card">Pending Request <span class="count orange">2</span></div>
-                    <div class="summary-card">In Progress <span class="count blue">2</span></div>
-                    <div class="summary-card">Completed <span class="count green">2</span></div>
-                    <div class="summary-card">Urgent Request <span class="count red">1</span></div>
-                </div>
-            </div>
-
-            <div class="card">
-                <span class="card-header">Maintenance Requests</span>
-
-                <table>
-                    <tr>
-                        <th>Room</th>
-                        <th>Tenant Name</th>
-                        <th>Issue</th>
-                        <th>Priority</th>
-                        <th>Date Received</th>
-                        <th>Status</th>
-                    </tr>
-
-                    <tr>
-                        <td>101</td>
-                        <td class="tenant green-text">Johnny Storm</td>
-                        <td>Leaky Faucet</td>
-                        <td><span class="tag low">Low</span></td>
-                        <td>11-05-25</td>
-                        <td><span class="status inprogress">In Progress</span></td>
-                    </tr>
-
-                    <tr>
-                        <td>102</td>
-                        <td>Michael Chen</td>
-                        <td>Outlet Not Working</td>
-                        <td><span class="tag medium">Medium</span></td>
-                        <td>11-05-25</td>
-                        <td><span class="status pending">Pending</span></td>
-                    </tr>
-
-                    <tr>
-                        <td>103</td>
-                        <td>Emily Rodriguez</td>
-                        <td>AC Not Cooling</td>
-                        <td><span class="tag urgent">Urgent</span></td>
-                        <td>11-05-25</td>
-                        <td><span class="status pending">Pending</span></td>
-                    </tr>
-
-                    <tr>
-                        <td>104</td>
-                        <td>David Kim</td>
-                        <td>Refrigerator Making Noise</td>
-                        <td><span class="tag low">Low</span></td>
-                        <td>11-05-25</td>
-                        <td><span class="status complete">Completed</span></td>
-                    </tr>
-
-                    <tr>
-                        <td>105</td>
-                        <td>Jessica Williams</td>
-                        <td>Door Lock Sticky</td>
-                        <td><span class="tag medium">Medium</span></td>
-                        <td>11-05-25</td>
-                        <td><span class="status complete">Completed</span></td>
-                    </tr>
-                </table>
-            </div>
-
+    <nav class="navbar">
+        <div class="nav-left">
+            <a href="account2.html" class="nav-btn active-page">Account</a>
         </div>
+        <div class="nav-right">
+            <a href="dashboard2.html" class="nav-btn">Dashboard</a>
+            <a href="payments2.html" class="nav-btn">Payments</a>
+            <a href="room.html" class="nav-btn">Room</a>
+            <a href="Upkeep2.html" class="nav-btn1">UpKeep</a>
+            <a href="../../login/html/login.html" class="nav-btn" onclick="localStorage.removeItem('currentTenant')">Log-out</a>
+        </div>
+    </nav>
+
+    <div class="container">
+
+        <div class="card" id="maintenanceForm">
+            <span class="card-header">Request Maintenance</span>
+            <div class="request-row">
+                <div class="issue-block">
+                    <label class="lbl">Describe the issue:</label>
+                    <textarea class="issue-text" id="issueText" placeholder="Write here..."></textarea>
+                </div>
+                <div class="priority-block">
+                    <label class="lbl">Priority:</label>
+                    <div class="priority-btn low" data-priority="Low">Low</div>
+                    <div class="priority-btn medium" data-priority="Medium">Medium</div>
+                    <div class="priority-btn urgent" data-priority="Urgent">Urgent</div>
+                    <button class="send-btn" id="sendBtn">SEND</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <span class="card-header">Maintenance & UpKeep</span>
+            <div class="search-box">
+                <input class="search-input" placeholder="Search..." id="searchInput" />
+            </div>
+            <div class="summary-row">
+                <div class="summary-card">Pending Request <span class="count orange" id="pendingCount">0</span></div>
+                <div class="summary-card">In Progress <span class="count blue" id="inProgressCount">0</span></div>
+                <div class="summary-card">Completed <span class="count green" id="completedCount">0</span></div>
+                <div class="summary-card">Urgent Request <span class="count red" id="urgentCount">0</span></div>
+            </div>
+        </div>
+
+        <div class="card">
+            <span class="card-header">Maintenance Requests</span>
+            <table id="requestsTable">
+                <tr>
+                    <th>Room</th>
+                    <th>Tenant Name</th>
+                    <th>Issue</th>
+                    <th>Priority</th>
+                    <th>Date Received</th>
+                    <th>Status</th>
+                </tr>
+            </table>
+        </div>
+
+    </div>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                const tenant = JSON.parse(localStorage.getItem('currentTenant')) || null;
+
+                const issueText = document.getElementById('issueText');
+                const sendBtn = document.getElementById('sendBtn');
+                const requestsTable = document.getElementById('requestsTable');
+                const searchInput = document.getElementById('searchInput');
+                let selectedPriority = 'Low';
+
+                document.querySelectorAll('.priority-btn').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        selectedPriority = btn.dataset.priority;
+                        document.querySelectorAll('.priority-btn').forEach(b => b.classList.remove('selected'));
+                        btn.classList.add('selected');
+                    });
+                });
+
+                let allRequests = JSON.parse(localStorage.getItem('requests')) || [];
+
+                function renderRequests() {
+                    requestsTable.innerHTML = `
+                        <tr>
+                            <th>Room</th>
+                            <th>Tenant Name</th>
+                            <th>Issue</th>
+                            <th>Priority</th>
+                            <th>Date Received</th>
+                            <th>Status</th>
+                        </tr>
+                    `;
+
+                    if (!tenant) return;
+
+                    const tenantRequests = allRequests.filter(r => r.room === tenant.roomNumber);
+
+                    tenantRequests.forEach(r => {
+                        const tenants = JSON.parse(localStorage.getItem('tenants')) || {};
+                        const currentTenantData = tenants[r.room] || tenant;
+                        const tenantName = (currentTenantData.firstName || currentTenantData.name?.split(" ")[0] || "") + " " + 
+                                        (currentTenantData.lastName || currentTenantData.name?.split(" ").slice(1).join(" ") || "");
+                        const tr = document.createElement('tr');
+                        tr.innerHTML = `
+                            <td>${r.room}</td>
+                            <td>${tenantName}</td>
+                            <td>${r.issue}</td>
+                            <td><span class="tag ${r.priority.toLowerCase()}">${r.priority}</span></td>
+                            <td>${r.date}</td>
+                            <td><span class="status ${r.status.toLowerCase().replace(' ', '')}">${r.status}</span></td>
+                        `;
+                        requestsTable.appendChild(tr);
+                    });
+
+                    updateSummary(tenantRequests);
+                }
+
+                function updateSummary(tenantRequests) {
+                    document.getElementById('pendingCount').textContent = tenantRequests.filter(r => r.status === 'Pending').length;
+                    document.getElementById('inProgressCount').textContent = tenantRequests.filter(r => r.status === 'In Progress').length;
+                    document.getElementById('completedCount').textContent = tenantRequests.filter(r => r.status === 'Completed').length;
+                    document.getElementById('urgentCount').textContent = tenantRequests.filter(r => r.priority === 'Urgent').length;
+                }
+
+                sendBtn.addEventListener('click', () => {
+                    if (!tenant) {
+                        alert('Please log in to submit a request.');
+                        return;
+                    }
+
+                    const issue = issueText.value.trim();
+                    if (!issue) {
+                        alert('Please describe the issue.');
+                        return;
+                    }
+
+                    const date = new Date().toLocaleDateString('en-GB');
+                    const newRequest = {
+                        room: tenant.roomNumber,
+                        name: tenant.firstName + (tenant.lastName ? ' ' + tenant.lastName : ''),
+                        issue: issue,
+                        priority: selectedPriority,
+                        date: date,
+                        status: 'Pending'
+                    };
+
+                    allRequests.push(newRequest);
+                    localStorage.setItem('requests', JSON.stringify(allRequests));
+
+                    issueText.value = '';
+                    selectedPriority = 'Low';
+                    document.querySelectorAll('.priority-btn').forEach(b => b.classList.remove('selected'));
+
+                    renderRequests();
+                });
+
+                searchInput.addEventListener('input', () => {
+                    const query = searchInput.value.toLowerCase();
+                    Array.from(requestsTable.rows).forEach((row, index) => {
+                        if (index === 0) return;
+                        row.style.display = row.textContent.toLowerCase().includes(query) ? '' : 'none';
+                    });
+                });
+
+                renderRequests();
+            });
+        </script>
+
 
     </body>
 </html>
