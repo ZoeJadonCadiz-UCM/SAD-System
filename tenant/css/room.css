@@ -117,15 +117,31 @@ body {
 }
 
 .status-badge {
-    padding: 8px 18px;
+    display: flex;                 
+    align-items: center;            
+    justify-content: center;      
+    padding: 5px 20px;              
     border-radius: 12px;
-    text-align: center;
     font-weight: 600;
+    font-size: 0.9rem;
+    min-width: 70px;                
+    white-space: nowrap;            
+    box-sizing: border-box;
     color: white;
+    text-align: center;            
 }
 
+
 .status-badge.active {
-    background: #07B76C;
+    background-color: #07B76C;   
+}
+
+.status-badge.occupied {
+    background-color: #E51E18; 
+}
+
+.status-badge.vacant {
+    background-color: #07B76C;   
 }
 
 .includes-card {
