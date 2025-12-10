@@ -66,78 +66,62 @@
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const tbody = document.getElementById('paymentsTableBody');
-            const totalRevenueEl = document.getElementById('totalRevenue');
-            const pendingPaymentsEl = document.getElementById('pendingPayments');
-            const nextPaymentEl = document.getElementById('nextPaymentDue');
+        document.addEventListener("DOMContentLoaded", () => {
+            const tbody = document.getElementById("paymentsTableBody");
+            const totalRevenueEl = document.getElementById("totalRevenue");
+            const pendingPaymentsEl = document.getElementById("pendingPayments");
+            const nextPaymentEl = document.getElementById("nextPaymentDue");
 
             const FIXED_AMOUNT = 450;
 
-            const tenants = JSON.parse(localStorage.getItem('tenants')) || {};
-            const currentUser = localStorage.getItem('currentUser');
-            const user = tenants[currentUser];
-
-            if (!user || user.status !== "Occupied") {
-                tbody.innerHTML = `<tr><td colspan="4">No active payments for current user.</td></tr>`;
-                totalRevenueEl.textContent = `$0`;
-                pendingPaymentsEl.textContent = `$0`;
-                if(nextPaymentEl) nextPaymentEl.textContent = '';
+            // --- Get the real logged-in tenant ---
+            const currentTenant = JSON.parse(localStorage.getItem("currentTenant"));
+            if (!currentTenant || !currentTenant.email) {
+                tbody.innerHTML = `<tr><td colspan="4">Please log in.</td></tr>`;
+                totalRevenueEl.textContent = "$0";
+                pendingPaymentsEl.textContent = "$0";
+                nextPaymentEl.textContent = "Next Payment Due: --";
                 return;
             }
 
-            // Load or initialize payment history
-            const allPaymentsKey = `payments_${currentUser}`;
-            let allPayments = JSON.parse(localStorage.getItem(allPaymentsKey)) || [];
+            // --- Load all tenants stored by admin ---
+            const tenants = JSON.parse(localStorage.getItem("tenants")) || {};
 
-            // Add current month if not already added
-            const today = new Date();
-            const thisMonthStr = `${today.getFullYear()}-${today.getMonth() + 1}`;
-            if (!allPayments.some(p => p.month === thisMonthStr)) {
-                allPayments.push({
-                    month: thisMonthStr,
-                    rent: user.rent,
-                    dueDate: user.dueDate || today.toISOString(),
-                    lastPayment: user.paymentStatus === "Paid" ? today.toISOString() : null,
-                    paymentStatus: user.paymentStatus
-                });
-                localStorage.setItem(allPaymentsKey, JSON.stringify(allPayments));
+            // --- Find tenant using email from currentTenant ---
+            const tenant = Object.values(tenants).find(t => t.email === currentTenant.email) || currentTenant;
+
+            if (!tenant || tenant.status !== "Occupied") {
+                tbody.innerHTML = `<tr><td colspan="4">No active payments found.</td></tr>`;
+                totalRevenueEl.textContent = "$0";
+                pendingPaymentsEl.textContent = "$0";
+                nextPaymentEl.textContent = "Next Payment Due: --";
+                return;
             }
 
-            const formatDate = (dateStr) => {
-                const d = new Date(dateStr);
-                const month = String(d.getMonth() + 1).padStart(2, '0');
-                const day = String(d.getDate()).padStart(2, '0');
-                const year = d.getFullYear().toString().slice(-2);
-                return `${month}-${day}-${year}`;
-            };
+            // --- Render tenant payment row ---
+            tbody.innerHTML = "";
+            const tr = document.createElement("tr");
+            tr.innerHTML = `
+                <td>$${tenant.rent || FIXED_AMOUNT}</td>
+                <td>${tenant.dueDate || 'Not Set'}</td>
+                <td>${tenant.lastPayment || "------"}</td>
+                <td><span class="tag ${tenant.paymentStatus?.toLowerCase() || 'pending'}">${tenant.paymentStatus || "Pending"}</span></td>
+            `;
+            tbody.appendChild(tr);
 
-            // Render all payments
-            let totalRevenue = 0;
-            let pendingPayments = 0;
-            tbody.innerHTML = '';
+            // --- Set summary ---
+            if ((tenant.paymentStatus || '').toLowerCase() === "paid") {
+                totalRevenueEl.textContent = `$${tenant.rent || FIXED_AMOUNT}`;
+                pendingPaymentsEl.textContent = "$0";
+            } else {
+                totalRevenueEl.textContent = "$0";
+                pendingPaymentsEl.textContent = `$${tenant.rent || FIXED_AMOUNT}`;
+            }
 
-            allPayments.forEach(p => {
-                const tr = document.createElement('tr');
-                const statusClass = p.paymentStatus.toLowerCase().replace(' ', '-');
-                tr.innerHTML = `
-                    <td>$${p.rent}</td>
-                    <td>${formatDate(p.dueDate)}</td>
-                    <td>${p.lastPayment ? formatDate(p.lastPayment) : '------'}</td>
-                    <td><span class="tag ${statusClass}">${p.paymentStatus}</span></td>
-                `;
-                tbody.appendChild(tr);
-
-                if(p.paymentStatus === "Paid") totalRevenue += FIXED_AMOUNT;
-                else pendingPayments += FIXED_AMOUNT;
-            });
-
-            totalRevenueEl.textContent = `$${totalRevenue}`;
-            pendingPaymentsEl.textContent = `$${pendingPayments}`;
-            if(nextPaymentEl) nextPaymentEl.textContent = `Next Payment Due: ${formatDate(user.dueDate || today)}`;
+            nextPaymentEl.textContent = "Next Payment Due: " + (tenant.dueDate || "--");
         });
-
         </script>
+
 
     </body>
 </html>
