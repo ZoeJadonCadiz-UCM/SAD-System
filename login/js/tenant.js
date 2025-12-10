@@ -1,26 +1,40 @@
+
 function loginTenant() {
-    const email = document.getElementById('tenantLoginEmail').value.trim();
-    const password = document.getElementById('tenantLoginPassword').value;
+    const email = document.getElementById("tenantLoginEmail").value;
+    const password = document.getElementById("tenantLoginPassword").value;
 
-    const tenants = JSON.parse(localStorage.getItem('tenants')) || {};
+    const tenants = JSON.parse(localStorage.getItem("tenants")) || {};
+    let currentUserKey = null;
 
-    // find tenant by email
-    let loggedInTenant = null;
-    for (const room in tenants) {
-        if (tenants[room].email === email && tenants[room].password === password) {
-            loggedInTenant = tenants[room];
+    for (const key in tenants) {
+        if (tenants[key].email === email && tenants[key].password === password) {
+            currentUserKey = key;
             break;
         }
     }
 
-    if (loggedInTenant) {
-        // e save ang current tenant in localStorage
-        localStorage.setItem('currentTenant', JSON.stringify(loggedInTenant));
- 
-        window.location.href = "../../tenant/html/dashboard2.html";
-        return false; 
+    if (currentUserKey) {
+        localStorage.setItem("currentUser", currentUserKey); 
+        window.location.href = "../../tenant/html/payments2.html"; 
+        return false;
     } else {
-        alert("Invalid email or password");
+        alert("Invalid email or password.");
         return false;
     }
+}
+
+function logoutTenant() {
+    localStorage.removeItem('currentTenant');
+    window.location.href = "../../login/html/login.html";
+}
+
+function getCurrentTenant() {
+    const tenant = JSON.parse(localStorage.getItem('currentTenant')) || null;
+    if (!tenant) return null;
+    return {
+        roomNumber: tenant.roomNumber,
+        firstName: tenant.firstName || "Tenant",
+        lastName: tenant.lastName || "",
+        email: tenant.email
+    };
 }
