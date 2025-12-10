@@ -190,16 +190,23 @@
                         document.getElementById('urgentCount').textContent = urgent;
                     }
 
-                    const clearBtn = document.getElementById('clearTableBtn');
+                  const clearBtn = document.getElementById('clearTableBtn');
                     if (clearBtn) {
                         clearBtn.addEventListener('click', () => {
-
+                            // Clear the table body
                             requestsTableBody.innerHTML = '';
 
+                            // Reset the summary counts
                             document.getElementById('pendingCount').textContent = '0';
                             document.getElementById('inProgressCount').textContent = '0';
                             document.getElementById('completedCount').textContent = '0';
                             document.getElementById('urgentCount').textContent = '0';
+
+                            // Clear all requests from localStorage
+                            localStorage.removeItem('requests');
+
+                            // Also clear the allRequests array in memory
+                            allRequests.length = 0;
                         });
                     }
 
