@@ -181,3 +181,8 @@ tbody td {
     background: #E51E18; 
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.562);
     }
+
+    select, option {
+    font-family: 'Outfit';
+}
+
