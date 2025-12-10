@@ -1,27 +1,24 @@
-
 function loginTenant() {
-    const email = document.getElementById("tenantLoginEmail").value;
-    const password = document.getElementById("tenantLoginPassword").value;
+    const email = document.getElementById('tenantLoginEmail').value;
+    const password = document.getElementById('tenantLoginPassword').value;
 
-    const tenants = JSON.parse(localStorage.getItem("tenants")) || {};
-    let currentUserKey = null;
+    const tenants = JSON.parse(localStorage.getItem('tenants')) || {};
+    const tenant = Object.values(tenants).find(t => t.email === email && t.password === password);
 
-    for (const key in tenants) {
-        if (tenants[key].email === email && tenants[key].password === password) {
-            currentUserKey = key;
-            break;
-        }
-    }
-
-    if (currentUserKey) {
-        localStorage.setItem("currentUser", currentUserKey); 
-        window.location.href = "../../tenant/html/payments2.html"; 
-        return false;
-    } else {
-        alert("Invalid email or password.");
+    if (!tenant) {
+        alert('Invalid email or password');
         return false;
     }
+
+    // ✅ Save tenant for all pages
+    localStorage.setItem('currentTenant', JSON.stringify(tenant));
+    localStorage.setItem('currentTenantEmail', tenant.email); // optional, for safety
+
+    // redirect to dashboard or account page
+    window.location.href = '../../tenant/html/dashboard2.html';
+    return false; // prevent default form submission
 }
+
 
 function logoutTenant() {
     localStorage.removeItem('currentTenant');
