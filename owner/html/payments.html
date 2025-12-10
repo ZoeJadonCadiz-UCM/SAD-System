@@ -6,165 +6,175 @@
         <title>Payments Dashboard</title>
         <link rel="stylesheet" href="../css/payments.css">
     </head>
+    <body>
 
-        <body>
+    <nav class="navbar">
+        <div class="nav-left">
+            <a href="account.html" class="nav-btn active-page">Account</a>
+        </div>
+        <div class="nav-right">
+            <a href="dashboard.html" class="nav-btn">Dashboard</a>
+            <a href="payments.html" class="nav-btn1">Payments</a>
+            <a href="tenants.html" class="nav-btn">Tenants</a>
+            <a href="Upkeep.html" class="nav-btn">UpKeep</a>
+            <a href="../../login/html/login.html" class="nav-btn">Log-out</a>
+        </div>
+    </nav>
 
-                <nav class="navbar">
-                    <div class = "nav-left">
-                        <a href="account.html" class = "nav-btn active-page">Account</a>
-                    </div>
+    <div class="page">
 
-                    <div classs = "nav-right">
-                        <a href="dashboard.html" class ="nav-btn">Dashboard</a>
-                        <a href="payments.html" class ="nav-btn1">Payments</a>
-                        <a href="tenants.html" class ="nav-btn">Tenants</a>
-                        <a href="Upkeep.html" class ="nav-btn">UpKeep</a>
-                        <a href="../../login/html/login.html" class ="nav-btn">Log-out</a>
-                    </div>
-                </nav>
-
-            <div class="page">
-
-                <div class="top-box">
-
-                    <div class="header-row">
-                        <div class="tag">Payment Management</div>
-
-                        <div class="search-wrap">
-                            <input type="text" placeholder="Search...">
-                        </div>
-                    </div>
-
-                    <div class="summary-row">
-
-                        <div class="summary-card">
-                            <p>Total Revenue<br>(this month)</p>
-                            <div class="value green-bg">$2,800</div>
-                        </div>
-
-                        <div class="summary-card">
-                            <p>Pending<br>Payments</p>
-                            <div class="value orange-bg">$1,950</div>
-                        </div>
-
-                    </div>
-
+        <div class="top-box">
+            <div class="header-row">
+                <div class="tag">Payment Management</div>
+                <div class="search-wrap">
+                    <input type="text" placeholder="Search..." id="searchInput">
                 </div>
-
-                <div class="table-box">
-
-                    <div class="table-title">Resident Payments</div>
-
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Room</th>
-                                <th>Tenant Name</th>
-                                <th>Monthly Rent</th>
-                                <th>Due Date</th>
-                                <th>Last Payment</th>
-                                <th>Status</th>
-                            </tr>
-                        </thead>
-
-                        <tbody>
-
-                            <tr>
-                                <td>101</td>
-                                <td class="green-text">Sarah Johnson</td>
-                                <td>$450</td>
-                                <td>11-05-25</td>
-                                <td>11-01-25</td>
-                                <td><span class="paid">Paid</span></td>
-                            </tr>
-
-                            <tr>
-                                <td>102</td>
-                                <td class="green-text">Michael Chen</td>
-                                <td>$450</td>
-                                <td>11-05-25</td>
-                                <td>11-02-25</td>
-                                <td><span class="paid">Paid</span></td>
-                            </tr>
-
-                            <tr>
-                                <td>103</td>
-                                <td class="orange-text">Emily Rodriguez</td>
-                                <td>$500</td>
-                                <td>11-05-25</td>
-                                <td>11-03-25</td>
-                                <td><span class="pending">Pending</span></td>
-                            </tr>
-
-                            <tr>
-                                <td>104</td>
-                                <td class="orange-text">David Kim</td>
-                                <td>$450</td>
-                                <td>11-05-25</td>
-                                <td>9-28-25</td>
-                                <td><span class="pending">Pending</span></td>
-                            </tr>
-
-                            <tr>
-                                <td>105</td>
-                                <td class="green-text">Jessica Williams</td>
-                                <td>$500</td>
-                                <td>11-05-25</td>
-                                <td>11-01-25</td>
-                                <td><span class="paid">Paid</span></td>
-                            </tr>
-
-                            <tr>
-                                <td>201</td>
-                                <td class="red-text">Olivia Davis</td>
-                                <td>$500</td>
-                                <td>11-05-25</td>
-                                <td>9-17-25</td>
-                                <td><span class="overdue">Overdue</span></td>
-                            </tr>
-
-                            <tr>
-                                <td>202</td>
-                                <td class="green-text">Matthew Wilson</td>
-                                <td>$450</td>
-                                <td>11-05-25</td>
-                                <td>11-04-25</td>
-                                <td><span class="paid">Paid</span></td>
-                            </tr>
-
-                            <tr>
-                                <td>203</td>
-                                <td class="green-text">Isabella Garcia</td>
-                                <td>$500</td>
-                                <td>11-05-25</td>
-                                <td>11-01-25</td>
-                                <td><span class="paid">Paid</span></td>
-                            </tr>
-
-                            <tr>                    
-                                <td>204</td>
-                                <td class="green-text">Ethan Moore</td>
-                                <td>$450</td>
-                                <td>11-05-25</td>
-                                <td>11-02-25</td>
-                                <td><span class="paid">Paid</span></td>
-                            </tr>
-
-                            <tr>
-                                <td>205</td>
-                                <td class="red-text">Daniel White</td>
-                                <td>$500</td>
-                                <td>11-05-25</td>
-                                <td>9-30-25</td>
-                                <td><span class="overdue">Overdue</span></td>
-                            </tr>
-
-                        </tbody>
-                    </table>
-
-                </div>
-
             </div>
 
-        </body>
+            <div class="summary-row">
+                <div class="summary-card">
+                    <p>Total Revenue<br>(this month)</p>
+                    <div id="totalRevenue" class="value green-bg">$0</div>
+                </div>
+                <div class="summary-card">
+                    <p>Pending<br>Payments</p>
+                    <div id="pendingPayments" class="value orange-bg">$0</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="table-box">
+            <div class="table-title">Resident Payments</div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Room</th>
+                        <th>Tenant Name</th>
+                        <th>Monthly Rent</th>
+                        <th>Due Date</th>
+                        <th>Last Payment</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody id="paymentsTableBody">
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+      <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const tbody = document.getElementById('paymentsTableBody');
+            const totalRevenueEl = document.getElementById('totalRevenue');
+            const pendingPaymentsEl = document.getElementById('pendingPayments');
+
+            const FIXED_AMOUNT = 450;
+            let totalRevenue = 0;
+            let pendingPayments = 0;
+
+            const tenants = JSON.parse(localStorage.getItem('tenants')) || {};
+            const checkedInTenants = Object.values(tenants).filter(t => t.status === "Occupied");
+
+            if (checkedInTenants.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="6">No tenants currently checked in.</td></tr>`;
+                totalRevenueEl.textContent = `$0`;
+                pendingPaymentsEl.textContent = `$0`;
+                return;
+            }
+
+            const formatDate = (date) => {
+                const d = new Date(date);
+                const month = String(d.getMonth() + 1).padStart(2, '0');
+                const day = String(d.getDate()).padStart(2, '0');
+                const year = d.getFullYear().toString().slice(-2);
+                return `${month}-${day}-${year}`;
+            };
+
+            const nextMonthDate = (dateStr) => {
+                const [month, day, year] = dateStr.split('-');
+                const d = new Date(`20${year}`, month - 1, day);
+                d.setMonth(d.getMonth() + 1);
+                return formatDate(d);
+            };
+
+            const todayDate = () => formatDate(new Date());
+
+            const updateSummary = () => {
+                totalRevenueEl.textContent = `$${totalRevenue}`;
+                pendingPaymentsEl.textContent = `$${pendingPayments}`;
+            };
+
+            const updateSelectClass = (select, status) => {
+                select.className = `status-select ${status.toLowerCase()}`;
+            };
+
+            checkedInTenants.forEach(tenant => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${tenant.room}</td>
+                    <td>${tenant.name}</td>
+                    <td>$${tenant.rent}</td>
+                    <td class="dueDate">${tenant.dueDate || "N/A"}</td>
+                    <td class="lastPayment">${tenant.lastPayment || "N/A"}</td>
+                    <td>
+                        <select class="status-select ${tenant.paymentStatus.toLowerCase()}">
+                            <option value="Paid" ${tenant.paymentStatus === "Paid" ? "selected" : ""}>Paid</option>
+                            <option value="Pending" ${tenant.paymentStatus === "Pending" ? "selected" : ""}>Pending</option>
+                            <option value="Overdue" ${tenant.paymentStatus === "Overdue" ? "selected" : ""}>Overdue</option>
+                        </select>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+
+                const select = tr.querySelector('.status-select');
+                select.dataset.prev = tenant.paymentStatus;
+
+                if (tenant.paymentStatus === "Paid") totalRevenue += FIXED_AMOUNT;
+                else pendingPayments += FIXED_AMOUNT;
+
+                select.addEventListener('change', () => {
+                    const prev = select.dataset.prev;
+                    const curr = select.value;
+
+                    if (curr === "Overdue") {
+                        select.value = prev; 
+                        return;
+                    }
+
+                    if (prev === "Paid" && curr !== "Paid") {
+                        totalRevenue -= FIXED_AMOUNT;
+                        pendingPayments += FIXED_AMOUNT;
+                        tr.querySelector('.lastPayment').textContent = 'N/A';
+                    } else if (prev !== "Paid" && curr === "Paid") {
+                        totalRevenue += FIXED_AMOUNT;
+                        pendingPayments -= FIXED_AMOUNT;
+                        const lastPayment = todayDate();
+                        const nextDue = nextMonthDate(tr.querySelector('.dueDate').textContent !== "N/A" ? tr.querySelector('.dueDate').textContent : lastPayment);
+                        tr.querySelector('.lastPayment').textContent = lastPayment;
+                        tr.querySelector('.dueDate').textContent = nextDue;
+                        tenant.lastPayment = lastPayment;
+                        tenant.dueDate = nextDue;
+                    }
+
+                    tenant.paymentStatus = curr;
+                    select.dataset.prev = curr;
+
+                    const allTenants = JSON.parse(localStorage.getItem('tenants'));
+                    allTenants[tenant.room] = tenant;
+                    localStorage.setItem('tenants', JSON.stringify(allTenants));
+
+                    updateSelectClass(select, curr);
+
+                    updateSummary();
+                });
+            });
+
+            updateSummary();
+        });
+        </script>
+
+
+
+    </body>
 </html>
