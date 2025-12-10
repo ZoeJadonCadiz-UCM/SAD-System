@@ -114,8 +114,8 @@ body {
 }
 
 .priority-btn.low { background: #31B3E0; }
-.priority-btn.medium { background: #F1A200; }
-.priority-btn.urgent { background: #D7263D; }
+.priority-btn.medium { background: #E48D12; }
+.priority-btn.urgent { background:  #E51E18; }
 
 .send-btn {
     background: #1bb76e;
@@ -172,10 +172,10 @@ body {
     font-weight: 600;
 }
 
-.orange { background: #F1A200; }
+.orange { background: #E48D12; }
 .blue   { background: #31B3E0; }
-.green  { background: #28A745; }
-.red    { background: #D7263D; }
+.green  { background: #07B76C; }
+.red    { background:  #E51E18; }
 
 table {
     width: 100%;
@@ -227,4 +227,13 @@ td {
 .green-text {
     color: #07B76C;
     font-weight: 600;
+}
+
+.priority-btn.selected {
+    border: 2px solid #000;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.562);
+}
+
+.clearTableBtn {
+    border-radius: 20px;
 }
