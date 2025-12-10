@@ -6,23 +6,20 @@
         <title>Room Information</title>
         <link rel="stylesheet" href="../css/room.css" />
     </head>
-
     <body>
 
-                            <nav class="navbar">
-                                <div class = "nav-left">
-                                    <a href="account.html" class = "nav-btn active-page">Account</a>
-                                </div>
-
-                                <div classs = "nav-right">
-                                    <a href="dashboard.html" class ="nav-btn">Dashboard</a>
-                                    <a href="payments.html" class ="nav-btn">Payments</a>
-                                    <a href="room.html" class ="nav-btn1">Room</a>
-                                    <a href="Upkeep.html" class ="nav-btn">UpKeep</a>
-                                    <a href="../../login/html/login.html" class ="nav-btn">Log-out</a>
-                                </div>
-                            </nav>
-
+        <nav class="navbar">
+            <div class="nav-left">
+                <a href="account2.html" class="nav-btn">Account</a>
+            </div>
+            <div class="nav-right">
+                <a href="dashboard2.html" class="nav-btn">Dashboard</a>
+                <a href="payments2.html" class="nav-btn">Payments</a>
+                <a href="room.html" class="nav-btn1 active-page">Room</a>
+                <a href="Upkeep2.html" class="nav-btn">UpKeep</a>
+                <a href="../../login/html/login.html" class="nav-btn">Log-out</a>
+            </div>
+        </nav>
 
         <div class="container">
 
@@ -39,21 +36,19 @@
 
                         <div class="profile-card">
                             <div class="profile-left">
-                                <img src="../img/pfp.png" class="avatar">
+                                <img src="../img/pfp.png" class="avatar" id="tenant-avatar">
                             </div>
 
                             <div class="profile-right">
-                                <h3 class="name">Johnny Storm</h3>
-                                <div class="info-line">✉ sarah.j@example.com</div>
-                                <div class="info-line">✆ +1 (555) 111-2222</div>
-                                <div class="info-line">🗓 2025-01-15</div>
+                                <h3 class="name" id="tenant-name">Loading...</h3>
+                                <div class="info-line" id="tenant-email">✉ Loading...</div>
+                                <div class="info-line" id="tenant-contact">✆ Loading...</div>
+                                <div class="info-line" id="tenant-date">🗓 Loading...</div>
                             </div>
 
-                            <div class="icon-box">
-                                🏠︎101
-                            </div>
+                            <div class="icon-box" id="tenant-room">🏠︎--</div>
 
-                            <div class="status-badge active">Active</div>
+                            <div class="status-badge active" id="tenant-status">Active</div>
                         </div>
 
                         <div class="includes-card">
@@ -72,10 +67,42 @@
 
                     </div>
                 </div>
-
             </div>
 
         </div>
+
+        <script>
+            window.addEventListener('DOMContentLoaded', () => {
+                const tenant = JSON.parse(localStorage.getItem('lastTenant')) || null;
+
+                if (tenant) {
+                    document.getElementById('tenant-name').textContent = `${tenant.firstName} ${tenant.lastName}`;
+                    document.getElementById('tenant-email').textContent = `✉ ${tenant.email}`;
+                    document.getElementById('tenant-contact').textContent = `✆ ${tenant.contact}`;
+                    document.getElementById('tenant-date').textContent = `🗓 ${tenant.date || 'Not set'}`;
+                    document.getElementById('tenant-room').textContent = `🏠︎${tenant.roomNumber || '--'}`;
+
+                    if (tenant.profilePicture) {
+                        document.getElementById('tenant-avatar').src = tenant.profilePicture;
+                    }
+
+                    const badge = document.getElementById('tenant-status');
+                    const statusText = tenant.status || 'Vacant';
+                    badge.textContent = statusText;
+
+            
+                    badge.className = 'status-badge'; 
+                    if (statusText.toLowerCase() === 'occupied') {
+                        badge.classList.add('occupied');
+                    } else if (statusText.toLowerCase() === 'vacant') {
+                        badge.classList.add('vacant');
+                    } else {
+                        badge.classList.add('active'); 
+                    }
+                }
+            });
+        </script>
+
 
     </body>
 </html>
