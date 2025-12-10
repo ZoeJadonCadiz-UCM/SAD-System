@@ -43,7 +43,9 @@ body {
 }
 
 .container {
-    padding: 35px 50px;
+    padding: 0;
+    width: 1080px;
+    margin: 30px auto;
 }
 
 .box {
@@ -120,10 +122,10 @@ body {
     font-size: 18px;
 }
 
-.yellow { color: #F1A200; }
+.yellow { color: #E48D12; }
 .blue { color: #31B3E0; }
-.green { color: #28A745; }
-.red { color: #D7263D; }
+.green { color: #07B76C; }
+.red { color: #E51E18; }
 
 .table-section {
     padding: 30px;
@@ -164,7 +166,6 @@ body {
     border-radius: 12px;
 }
 
-/* TABLE */
 table {
     width: 100%;
     border-collapse: separate;
@@ -243,4 +244,42 @@ tbody td {
 .sort-dropdown select:hover {
     background: #F0F0F0;
 }
+
+.status-select {
+    padding: 8px 18px;
+    border-radius: 30px;
+    font-size: 14px;
+    font-weight: 800;
+    color: white;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    appearance: none; 
+    text-align: center;
+    min-width: 120px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.562);
+    transition: background 0.3s;
+    font-family: 'Outfit';
+    background: transparent;
+}
+
+.status-select.pending { background: #E48D12; }
+.status-select.in-progress { background: #28A8E0; }
+.status-select.completed { background: #07B76C; }
+
+.status-select::-ms-expand { display: none; }
+.status-select option { color: black; }
+
+#clearTableBtn {
+    border-radius: 10px;
+    padding: 8px 16px; 
+    border: 1px solid #333;        
+    cursor: pointer;
+    background-color: #EEE8DF;
+    }
+
+#clearTableBtn:hover {
+    background-color: #e0e0e0; 
+    }
+
 
