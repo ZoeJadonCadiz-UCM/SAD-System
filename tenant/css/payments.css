@@ -162,3 +162,68 @@ table td {
     font-weight: 600;
     color: #2C365A;
 }
+
+table th, table td {
+    text-align: center;
+    vertical-align: middle;
+}
+
+table td {
+    padding: 16px;
+    border-bottom: 10px solid #EEE8DF;
+    font-weight: bold;
+}
+
+table td div {
+    display: inline-block;
+    width: 100%;
+}
+
+.status {
+    padding: 8px 16px;
+    border-radius: 12px;
+    color: white;
+    font-weight: 600;
+}
+
+.pending {
+    background: #E48D12;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.562);
+}
+
+.paid {
+    background: #07B76C;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.562);
+}
+
+table tbody tr:nth-child(even) {
+    background-color: #f4f4f4;
+}
+
+.status-label.Paid {
+    color: #07B76C;
+    font-weight: bold;
+}
+
+.status-label.Pending {
+    color: #E48D12;
+    font-weight: bold;
+}
+
+.status-label.Overdue {
+    color: #E51E18;
+    font-weight: bold;
+}
+
+.tag {
+    padding: 8px 18px;
+    border-radius: 30px;
+    font-size: 14px;
+    color: white;
+    font-weight: 800;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.562);
+}
+
+.paid { background: #07B76C; }        
+.pending { background: #E48D12; }     
+.overdue { background: #E51E18; }     
