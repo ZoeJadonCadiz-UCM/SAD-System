@@ -73,14 +73,15 @@
 
         <script>
             window.addEventListener('DOMContentLoaded', () => {
-                const tenant = JSON.parse(localStorage.getItem('lastTenant')) || null;
+                const tenant = JSON.parse(localStorage.getItem('currentTenant')) || null;
 
                 if (tenant) {
-                    document.getElementById('tenant-name').textContent = `${tenant.firstName} ${tenant.lastName}`;
-                    document.getElementById('tenant-email').textContent = `✉ ${tenant.email}`;
-                    document.getElementById('tenant-contact').textContent = `✆ ${tenant.contact}`;
-                    document.getElementById('tenant-date').textContent = `🗓 ${tenant.date || 'Not set'}`;
-                    document.getElementById('tenant-room').textContent = `🏠︎${tenant.roomNumber || '--'}`;
+                    document.getElementById('tenant-name').textContent = tenant.name || 'Tenant';
+                    document.getElementById('tenant-email').textContent = `✉ ${tenant.email || 'Not set'}`;
+                    document.getElementById('tenant-contact').textContent = `✆ ${tenant.contact || 'Not set'}`;
+                    document.getElementById('tenant-date').textContent = `🗓 ${tenant.dueDate || 'Not set'}`;
+                    document.getElementById('tenant-room').textContent = `🏠︎${tenant.room || '--'}`;
+
 
                     if (tenant.profilePicture) {
                         document.getElementById('tenant-avatar').src = tenant.profilePicture;

@@ -74,7 +74,6 @@
 
             const FIXED_AMOUNT = 450;
 
-            // --- Get the real logged-in tenant ---
             const currentTenant = JSON.parse(localStorage.getItem("currentTenant"));
             if (!currentTenant || !currentTenant.email) {
                 tbody.innerHTML = `<tr><td colspan="4">Please log in.</td></tr>`;
@@ -84,7 +83,6 @@
                 return;
             }
 
-            // --- Load all tenants stored by admin ---
             const tenants = JSON.parse(localStorage.getItem("tenants")) || {};
 
             // --- Find tenant using email from currentTenant ---
@@ -98,7 +96,6 @@
                 return;
             }
 
-            // --- Render tenant payment row ---
             tbody.innerHTML = "";
             const tr = document.createElement("tr");
             tr.innerHTML = `
@@ -109,7 +106,6 @@
             `;
             tbody.appendChild(tr);
 
-            // --- Set summary ---
             if ((tenant.paymentStatus || '').toLowerCase() === "paid") {
                 totalRevenueEl.textContent = `$${tenant.rent || FIXED_AMOUNT}`;
                 pendingPaymentsEl.textContent = "$0";

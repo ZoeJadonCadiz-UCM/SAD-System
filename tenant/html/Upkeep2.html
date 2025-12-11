@@ -28,7 +28,6 @@
 
     <div class="container">
 
-        <!-- Submit Maintenance Form -->
         <div class="card" id="maintenanceForm">
             <span class="card-header">Request Maintenance</span>
 
@@ -48,7 +47,6 @@
             </div>
         </div>
 
-        <!-- Summary Cards -->
         <div class="card">
             <span class="card-header">Maintenance & UpKeep</span>
 
@@ -64,7 +62,6 @@
             </div>
         </div>
 
-        <!-- Requests Table -->
         <div class="card">
             <span class="card-header">Maintenance Requests</span>
 
@@ -85,18 +82,15 @@
     <script>
     document.addEventListener('DOMContentLoaded', () => {
 
-        // Load the currently logged-in tenant
         const tenant = JSON.parse(localStorage.getItem('currentTenant')) || null;
         console.log("Loaded tenant:", tenant);
 
-        // DOM elements
         const issueText = document.getElementById('issueText');
         const sendBtn = document.getElementById('sendBtn');
         const requestsTable = document.getElementById('requestsTable');
         const searchInput = document.getElementById('searchInput');
         let selectedPriority = 'Low';
 
-        // Priority selection visual
         document.querySelectorAll('.priority-btn').forEach(btn => {
             btn.addEventListener('click', () => {
                 selectedPriority = btn.dataset.priority;
@@ -105,12 +99,8 @@
             });
         });
 
-        // Load existing requests from storage
         let allRequests = JSON.parse(localStorage.getItem('requests')) || [];
 
-        /* ============================
-        Render Requests Table
-        ============================= */
         function renderRequests() {
             requestsTable.innerHTML = `
                 <tr>
@@ -123,7 +113,6 @@
                 </tr>
             `;
 
-            // Filter only requests for this tenant
             const tenantRequests = tenant ?
                 allRequests.filter(r => r.room === tenant.room) :
                 allRequests;
@@ -144,9 +133,6 @@
             updateSummary(tenantRequests);
         }
 
-        /* ============================
-        Update Summary Counts
-        ============================= */
         function updateSummary(reqs) {
             document.getElementById('pendingCount').textContent =
                 reqs.filter(r => r.status === 'Pending').length;
@@ -161,9 +147,6 @@
                 reqs.filter(r => r.priority === 'Urgent').length;
         }
 
-        /* ============================
-        Submit a New Request
-        ============================= */
         sendBtn.addEventListener('click', () => {
 
             if (!tenant) {
@@ -179,7 +162,6 @@
 
             const date = new Date().toLocaleDateString('en-GB');
 
-            // ⬇⬇ FIXED HERE — USE tenant.room AND tenant.name
             const newRequest = {
                 room: tenant.room,
                 name: tenant.name,
@@ -199,9 +181,6 @@
             renderRequests();
         });
 
-        /* ============================
-        Search Filter
-        ============================= */
         searchInput.addEventListener('input', () => {
             const query = searchInput.value.toLowerCase();
             Array.from(requestsTable.rows).forEach((row, index) => {
@@ -209,8 +188,7 @@
                 row.style.display = row.textContent.toLowerCase().includes(query) ? '' : 'none';
             });
         });
-
-        // Initial render
+        
         renderRequests();
     });
     </script>
