@@ -10,6 +10,7 @@
             .priority-btn { cursor: pointer; }
         </style>
     </head>
+
     <body>
 
     <nav class="navbar">
@@ -27,13 +28,16 @@
 
     <div class="container">
 
+        <!-- Submit Maintenance Form -->
         <div class="card" id="maintenanceForm">
             <span class="card-header">Request Maintenance</span>
+
             <div class="request-row">
                 <div class="issue-block">
                     <label class="lbl">Describe the issue:</label>
                     <textarea class="issue-text" id="issueText" placeholder="Write here..."></textarea>
                 </div>
+
                 <div class="priority-block">
                     <label class="lbl">Priority:</label>
                     <div class="priority-btn low" data-priority="Low">Low</div>
@@ -44,11 +48,14 @@
             </div>
         </div>
 
+        <!-- Summary Cards -->
         <div class="card">
             <span class="card-header">Maintenance & UpKeep</span>
+
             <div class="search-box">
-                <input class="search-input" placeholder="Search..." id="searchInput" />
+                <input class="search-input" placeholder="Search..." id="searchInput">
             </div>
+
             <div class="summary-row">
                 <div class="summary-card">Pending Request <span class="count orange" id="pendingCount">0</span></div>
                 <div class="summary-card">In Progress <span class="count blue" id="inProgressCount">0</span></div>
@@ -57,8 +64,10 @@
             </div>
         </div>
 
+        <!-- Requests Table -->
         <div class="card">
             <span class="card-header">Maintenance Requests</span>
+
             <table id="requestsTable">
                 <tr>
                     <th>Room</th>
@@ -73,122 +82,138 @@
 
     </div>
 
-        <script>
-            document.addEventListener('DOMContentLoaded', () => {
-                // Load current tenant
-                const tenant = JSON.parse(localStorage.getItem('currentTenant')) || null;
-                console.log("Loaded tenant:", tenant); // debug
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
 
-                // DOM elements
-                const issueText = document.getElementById('issueText');
-                const sendBtn = document.getElementById('sendBtn');
-                const requestsTable = document.getElementById('requestsTable');
-                const searchInput = document.getElementById('searchInput');
-                let selectedPriority = 'Low';
+        // Load the currently logged-in tenant
+        const tenant = JSON.parse(localStorage.getItem('currentTenant')) || null;
+        console.log("Loaded tenant:", tenant);
 
-                // Priority selection
-                document.querySelectorAll('.priority-btn').forEach(btn => {
-                    btn.addEventListener('click', () => {
-                        selectedPriority = btn.dataset.priority;
-                        document.querySelectorAll('.priority-btn').forEach(b => b.classList.remove('selected'));
-                        btn.classList.add('selected');
-                    });
-                });
+        // DOM elements
+        const issueText = document.getElementById('issueText');
+        const sendBtn = document.getElementById('sendBtn');
+        const requestsTable = document.getElementById('requestsTable');
+        const searchInput = document.getElementById('searchInput');
+        let selectedPriority = 'Low';
 
-                // Load existing requests
-                let allRequests = JSON.parse(localStorage.getItem('requests')) || [];
-
-                // Render requests in the table
-                function renderRequests() {
-                    requestsTable.innerHTML = `
-                        <tr>
-                            <th>Room</th>
-                            <th>Tenant Name</th>
-                            <th>Issue</th>
-                            <th>Priority</th>
-                            <th>Date Received</th>
-                            <th>Status</th>
-                        </tr>
-                    `;
-
-                    // Show requests for current tenant
-                    const tenantRequests = tenant 
-                        ? allRequests.filter(r => r.room === tenant.roomNumber) 
-                        : allRequests;
-
-                    tenantRequests.forEach(r => {
-                        const tr = document.createElement('tr');
-                        tr.innerHTML = `
-                            <td>${r.room || 'N/A'}</td>
-                            <td>${r.name || 'Unknown'}</td>
-                            <td>${r.issue || 'No description'}</td>
-                            <td><span class="tag ${r.priority.toLowerCase()}">${r.priority}</span></td>
-                            <td>${r.date || 'N/A'}</td>
-                            <td><span class="status ${r.status.toLowerCase().replace(' ', '')}">${r.status}</span></td>
-                        `;
-                        requestsTable.appendChild(tr);
-                    });
-
-                    updateSummary(tenantRequests);
-                }
-
-                // Update summary counts
-                function updateSummary(tenantRequests) {
-                    document.getElementById('pendingCount').textContent = tenantRequests.filter(r => r.status === 'Pending').length;
-                    document.getElementById('inProgressCount').textContent = tenantRequests.filter(r => r.status === 'In Progress').length;
-                    document.getElementById('completedCount').textContent = tenantRequests.filter(r => r.status === 'Completed').length;
-                    document.getElementById('urgentCount').textContent = tenantRequests.filter(r => r.priority === 'Urgent').length;
-                }
-
-                // Submit a new request
-                sendBtn.addEventListener('click', () => {
-                    if (!tenant) {
-                        alert('Please log in to submit a request.');
-                        return;
-                    }
-
-                    const issue = issueText.value.trim();
-                    if (!issue) {
-                        alert('Please describe the issue.');
-                        return;
-                    }
-
-                    const date = new Date().toLocaleDateString('en-GB');
-                    const newRequest = {
-                        room: tenant.roomNumber,
-                        name: tenant.firstName + (tenant.lastName ? ' ' + tenant.lastName : ''),
-                        issue: issue,
-                        priority: selectedPriority,
-                        date: date,
-                        status: 'Pending'
-                    };
-
-                    // Add to array and localStorage
-                    allRequests.push(newRequest);
-                    localStorage.setItem('requests', JSON.stringify(allRequests));
-
-                    // Reset form
-                    issueText.value = '';
-                    selectedPriority = 'Low';
-                    document.querySelectorAll('.priority-btn').forEach(b => b.classList.remove('selected'));
-
-                    // Re-render table
-                    renderRequests();
-                });
-
-                // Search functionality
-                searchInput.addEventListener('input', () => {
-                    const query = searchInput.value.toLowerCase();
-                    Array.from(requestsTable.rows).forEach((row, index) => {
-                        if (index === 0) return; // Skip header
-                        row.style.display = row.textContent.toLowerCase().includes(query) ? '' : 'none';
-                    });
-                });
-
-                // Initial render
-                renderRequests();
+        // Priority selection visual
+        document.querySelectorAll('.priority-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                selectedPriority = btn.dataset.priority;
+                document.querySelectorAll('.priority-btn').forEach(b => b.classList.remove('selected'));
+                btn.classList.add('selected');
             });
-            </script>
+        });
+
+        // Load existing requests from storage
+        let allRequests = JSON.parse(localStorage.getItem('requests')) || [];
+
+        /* ============================
+        Render Requests Table
+        ============================= */
+        function renderRequests() {
+            requestsTable.innerHTML = `
+                <tr>
+                    <th>Room</th>
+                    <th>Tenant Name</th>
+                    <th>Issue</th>
+                    <th>Priority</th>
+                    <th>Date Received</th>
+                    <th>Status</th>
+                </tr>
+            `;
+
+            // Filter only requests for this tenant
+            const tenantRequests = tenant ?
+                allRequests.filter(r => r.room === tenant.room) :
+                allRequests;
+
+            tenantRequests.forEach(r => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${r.room || 'N/A'}</td>
+                    <td>${r.name || 'Unknown'}</td>
+                    <td>${r.issue || 'No description'}</td>
+                    <td><span class="tag ${r.priority.toLowerCase()}">${r.priority}</span></td>
+                    <td>${r.date || 'N/A'}</td>
+                    <td><span class="status ${r.status.toLowerCase().replace(' ', '')}">${r.status}</span></td>
+                `;
+                requestsTable.appendChild(tr);
+            });
+
+            updateSummary(tenantRequests);
+        }
+
+        /* ============================
+        Update Summary Counts
+        ============================= */
+        function updateSummary(reqs) {
+            document.getElementById('pendingCount').textContent =
+                reqs.filter(r => r.status === 'Pending').length;
+
+            document.getElementById('inProgressCount').textContent =
+                reqs.filter(r => r.status === 'In Progress').length;
+
+            document.getElementById('completedCount').textContent =
+                reqs.filter(r => r.status === 'Completed').length;
+
+            document.getElementById('urgentCount').textContent =
+                reqs.filter(r => r.priority === 'Urgent').length;
+        }
+
+        /* ============================
+        Submit a New Request
+        ============================= */
+        sendBtn.addEventListener('click', () => {
+
+            if (!tenant) {
+                alert('Please log in to submit a request.');
+                return;
+            }
+
+            const issue = issueText.value.trim();
+            if (!issue) {
+                alert('Please describe the issue.');
+                return;
+            }
+
+            const date = new Date().toLocaleDateString('en-GB');
+
+            // ⬇⬇ FIXED HERE — USE tenant.room AND tenant.name
+            const newRequest = {
+                room: tenant.room,
+                name: tenant.name,
+                issue: issue,
+                priority: selectedPriority,
+                date: date,
+                status: 'Pending'
+            };
+
+            allRequests.push(newRequest);
+            localStorage.setItem('requests', JSON.stringify(allRequests));
+
+            issueText.value = '';
+            selectedPriority = 'Low';
+            document.querySelectorAll('.priority-btn').forEach(b => b.classList.remove('selected'));
+
+            renderRequests();
+        });
+
+        /* ============================
+        Search Filter
+        ============================= */
+        searchInput.addEventListener('input', () => {
+            const query = searchInput.value.toLowerCase();
+            Array.from(requestsTable.rows).forEach((row, index) => {
+                if (index === 0) return;
+                row.style.display = row.textContent.toLowerCase().includes(query) ? '' : 'none';
+            });
+        });
+
+        // Initial render
+        renderRequests();
+    });
+    </script>
 
     </body>
 </html>
