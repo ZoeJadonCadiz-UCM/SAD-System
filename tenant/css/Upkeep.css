@@ -113,9 +113,17 @@ body {
     cursor: pointer;
 }
 
-.priority-btn.low { background: #31B3E0; }
-.priority-btn.medium { background: #E48D12; }
-.priority-btn.urgent { background:  #E51E18; }
+.priority-btn.low { background: #31B3E0;}
+.priority-btn.medium { background: #E48D12;}
+.priority-btn.urgent { background:  #E51E18;}
+
+.tag, .status {
+    padding: 5px 10px;
+    border-radius: 5px;
+    display: inline-block;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.562);
+}
+
 
 .send-btn {
     background: #1bb76e;
@@ -222,7 +230,7 @@ td {
 
 .status.inprogress { background: #42B9FF; }
 .status.pending { background: #E48D12; }
-.status.complete { background: #07B76C; }
+.status.completed { background: #07B76C; }
 
 .green-text {
     color: #07B76C;
